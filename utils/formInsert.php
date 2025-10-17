@@ -1,31 +1,37 @@
 <?php
 include '../config/config.php';
 
-// Ambil data dari form
 $nama       = $_POST['nama'];
 $telepon    = $_POST['telepon'];
 $instansi   = $_POST['instansi'];
 $alamat     = $_POST['alamat'];
 $keperluan  = $_POST['keperluan'];
-$bidang_tujuan_id = $_POST['tujuan']; // ID bidang tujuan
+$bidang_tujuan_id = $_POST['tujuan'];
 $foto       = $_FILES['foto'];
+$base64Foto = $_POST['base64_foto']; 
 
-// Proses upload foto
 $namaFile = "";
-if ($foto['error'] == 0) {
+$targetDir = "uploads/";
+
+if (!is_dir($targetDir)) {
+  mkdir($targetDir, 0777, true);
+}
+
+if (!empty($base64Foto)) {
+  $imgData = str_replace('data:image/jpeg;base64,', '', $base64Foto);
+  $imgData = str_replace(' ', '+', $imgData);
+  $data = base64_decode($imgData);
+
+  $namaFile = "kamera_" . time() . ".jpg";
+  $filePath = $targetDir . $namaFile;
+  file_put_contents($filePath, $data);
+
+} elseif ($foto['error'] == 0) {
   $namaFile = time() . "_" . basename($foto['name']);
-  $targetDir = "uploads/";
   $targetFile = $targetDir . $namaFile;
-
-  // Pastikan folder ada
-  if (!is_dir($targetDir)) {
-    mkdir($targetDir, 0777, true);
-  }
-
   move_uploaded_file($foto['tmp_name'], $targetFile);
 }
 
-// Query insert ke tabel tamu
 $sql = "INSERT INTO tamu (nama, no_telpon, instansi_asal, alamat, bidang_tujuan_id, keperluan, foto)
         VALUES ('$nama', '$telepon', '$instansi', '$alamat', '$bidang_tujuan_id', '$keperluan', '$namaFile')";
 

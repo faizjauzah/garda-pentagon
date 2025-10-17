@@ -1,10 +1,8 @@
 <?php
 include 'config/config.php';
 
-// Ambil bidang dari URL
 $bidang = $_GET['bidang'] ?? 'pimpinan';
 
-// Tentukan judul dan ID bidang untuk penyimpanan
 switch ($bidang) {
   case 'kepaniteraan':
     $judul = 'Buku Presensi Tamu Kepaniteraan';
@@ -20,7 +18,6 @@ switch ($bidang) {
     break;
 }
 
-// 🔹 Tambahkan query bidang_tujuan di sini
 $bidangResult = mysqli_query($conn, "SELECT * FROM penerima_tamu where bidang_tujuan_id = $id_bidang");
 
 if (!$bidangResult) {
@@ -56,11 +53,6 @@ if (!$bidangResult) {
         </button>
         <!-- Title -->
         <h1 class="font-semibold text-black text-2xl sm:text-3xl lg:text-4xl text-center mb-8 sm:mb-12"><?= $judul; ?></h1>
-
-        <!-- <button onclick="window.location.href='index.php';" class="flex items-center gap-[17px] bg-[#1d4c08] hover:bg-[#1d4c08]/90 rounded-[100px] h-11 px-[21px] mb-4 sm:mb-2 text-white">
-          <img src="public/images/arrow-2.svg" alt="Kembali" class="w-[21px] h-[14.73px]" />
-          <span class="font-medium text-sm">Kembali</span>
-        </button> -->
         
         <!-- Form -->
         <form id=formtamu class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[46px] mb-8 sm:mb-12" enctype="multipart/form-data" method="POST" action="utils/formInsert.php">
@@ -113,6 +105,14 @@ if (!$bidangResult) {
               <p id="upload-text" class="text-[#474747] text-sm sm:text-base text-center max-w-[280px]">Klik atau seret file ke area ini untuk mengunggah gambar</p>
               <input type="file" id="foto" name="foto" accept=".jpg,.jpeg,.png" class="hidden" />
             </label>
+            <input type="hidden" name="base64_foto" id="base64_foto">
+
+            <!-- Tambahkan tombol kamera -->
+            <div class="mt-3 text-center">
+              <button type="button" onclick="openCamera()" class="bg-[#1d4c08] hover:bg-[#256a10] text-white px-5 py-2 rounded-full text-sm transition">📷 Ambil dari Kamera</button>
+            </div>
+            
+
 
             <p class="text-[#9c9c9c] text-sm">Format yang diterima adalah .jpg, .jpeg, dan .png</p>
 
@@ -128,7 +128,34 @@ if (!$bidangResult) {
     </main>
 
     <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
     <script src = "public/js/main.js"></script>
     <!-- <script src="public/js/alert.js"></script> -->
+    
+    <!-- Modal Kamera -->
+    <div id="modalCamera" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+      <div class="bg-white rounded-xl shadow-xl p-6 w-[90%] max-w-md relative">
+        <h2 class="text-xl font-semibold mb-4 text-center text-gray-800">Ambil Foto Diri</h2>
+
+        <!-- Kamera dengan Outline -->
+        <div class="flex justify-center w-full">
+          <div id="my_camera"
+            class="rounded-xl overflow-hidden mb-4 border border-gray-200 outline outline-1 outline-[#1d4c08] outline-offset-0 w-full h-[240px]">
+          </div>
+        </div>
+
+        <!-- Tombol Aksi (lebar menyesuaikan video) -->
+        <div class="flex justify-between mt-4 w-full">
+          <button onclick="closeCamera()" 
+            class="bg-gray-100 text-[#1d4c08] px-4 py-2 rounded-full border border-[#1d4c08] hover:bg-[#1d4c08] hover:text-white transition w-[48%]">
+            Batal
+          </button>
+          <button onclick="takeSnapshot()" 
+            class="bg-[#1d4c08] hover:bg-[#163b06] text-white px-4 py-2 rounded-full transition w-[48%]">
+            Ambil Foto
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
