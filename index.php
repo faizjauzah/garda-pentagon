@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Garda Pentagon - Pengadilan Agama Gorontalo</title>
-    <link rel="stylesheet" href="/public/css/output.css" />
+    <link rel="stylesheet" href="public/css/output.css" />
   </head>
 
   <body class="bg-white flex flex-col w-full">
@@ -60,7 +60,7 @@
           </div>
           <h3 class="font-medium text-black text-lg text-center mb-2">Tamu Pimpinan</h3>
           <p class="text-[#666666] text-sm text-center mb-6">Presensi bagi tamu-tamu pimpinan Pengadilan Agama Gorontalo</p>
-          <a href="formTamuPimpinan.html" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
+          <a href="form_tamu.php?bidang=pimpinan" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
             <span>Presensi</span>
             <img src="public/images/arrow-1.svg" alt="Arrow" class="w-[12px] h-[12px]" />
           </a>
@@ -72,7 +72,7 @@
           </div>
           <h3 class="font-medium text-black text-lg text-center mb-2">Tamu Kepaniteraan</h3>
           <p class="text-[#666666] text-sm text-center mb-6">Presensi bagi tamu-tamu kepaniteraan Pengadilan Agama Gorontalo</p>
-          <a href="formTamuKepaniteraan.html" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
+          <a href="form_tamu.php?bidang=kepaniteraan" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
             <span>Presensi</span>
             <img src="public/images/arrow-1.svg" alt="Arrow" class="w-[12px] h-[12px]" />
           </a>
@@ -84,7 +84,7 @@
           </div>
           <h3 class="font-medium text-black text-lg text-center mb-2">Tamu Kesekretariatan</h3>
           <p class="text-[#666666] text-sm text-center mb-6">Presensi bagi tamu-tamu kesekretariatan Pengadilan Agama Gorontalo</p>
-          <a href="formTamuKesekretariatan.html" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
+          <a href="form_tamu.php?bidang=kesekretariatan" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
             <span>Presensi</span>
             <img src="public/images/arrow-1.svg" alt="Arrow" class="w-[12px] h-[12px]" />
           </a>
