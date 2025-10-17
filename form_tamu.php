@@ -92,7 +92,7 @@ if (!$bidangResult) {
               <select id="tujuan" name="tujuan" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required>
                 <option selected disabled>Pilih Tujuan</option>
                 <?php while ($b = mysqli_fetch_assoc($bidangResult)) { ?>
-                  <option value="<?= $b['id_penerima']; ?>"><?= $b['nama_penerima']; ?></option>
+                  <option value="<?= $b['id_penerima']; ?>"><?= $b['jabatan']; ?></option>
                   <?php } ?>
               </select>
             </div>
