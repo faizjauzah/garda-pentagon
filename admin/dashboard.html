@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/public/css/output.css" />
+  </head>
+  <body class="bg-[#f3f3f3] w-full min-h-screen flex flex-col lg:flex-row">
+    <!-- Sidebar -->
+    <aside class="flex lg:inline-flex w-full lg:w-[280px] lg:min-h-screen flex-col bg-white border-b lg:border-r lg:border-b-0 border-solid border-[#a7a6a6] lg:items-start sticky top-0 lg:static z-50">
+      <div class="relative w-full lg:w-[280px] h-[70px] lg:h-[106px] flex items-center justify-between lg:justify-start gap-2 px-4 lg:px-0">
+        <div class="flex items-center gap-2">
+          <img src="../public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="relative lg:absolute lg:top-4 lg:left-7 w-[40px] lg:w-[59px] h-[50px] lg:h-[73px] object-cover" />
+          <img src="../public/images/pan-rb-qdw0uf2dup27vg4nbkjrrm75c0xvmz2s0pbnrvyh3o-1.png" alt="Pan RB" class="relative lg:absolute lg:top-4 lg:left-[103px] w-[50px] lg:w-[73px] h-[50px] lg:h-[73px] object-cover" />
+        </div>
+
+        <!-- Mobile menu toggle -->
+        <button id="menu-btn" class="lg:hidden p-2">
+          <img id="menu-icon" src="../public/images/menu.svg" alt="Menu" class="w-6 h-6" />
+        </button>
+      </div>
+
+      <!-- Navigation -->
+      <nav id="nav" class="hidden lg:flex flex-col items-start gap-2 p-2 flex-1 grow w-full">
+        <button class="flex w-full items-center gap-3 px-5 py-3 rounded-3xl justify-start hover:bg-gray-100">
+          <img src="../public/images/icon--from-tabler-io--9.svg" class="w-4 h-4" alt="Dashboard icon" />
+          <span class="font-normal text-[#131313] text-sm">Dashboard</span>
+        </button>
+
+        <button class="flex w-full items-center gap-3 px-5 py-3 rounded-3xl justify-start hover:bg-gray-100">
+          <img src="../public/images/icon--from-tabler-io--7.svg" class="w-4 h-4" alt="Icon" />
+          <span class="font-normal text-[#131313] text-sm">Tamu Pimpinan</span>
+        </button>
+
+        <button class="flex w-full items-center gap-3 px-5 py-3 rounded-3xl justify-start hover:bg-gray-100">
+          <img src="../public/images/icon--from-tabler-io--7.svg" class="w-4 h-4" alt="Icon" />
+          <span class="font-normal text-[#131313] text-sm">Tamu Kepaniteraan</span>
+        </button>
+
+        <button class="flex w-full items-center gap-3 px-5 py-3 rounded-3xl justify-start hover:bg-gray-100">
+          <img src="../public/images/icon--from-tabler-io--7.svg" class="w-4 h-4" alt="Icon" />
+          <span class="font-normal text-[#131313] text-sm">Tamu Kesekretariatan</span>
+        </button>
+      </nav>
+
+      <!-- Footer -->
+      <footer id="footer" class="hidden lg:flex flex-col items-center justify-end gap-3 pt-4 pb-6 px-2 self-stretch w-full">
+        <div class="flex h-10 items-center gap-3 px-5 w-full">
+          <div class="flex flex-col items-start justify-center gap-1">
+            <div class="font-medium text-sm text-[#131313]">Admin Satu</div>
+            <div class="bg-[#ffcc70] rounded-3xl px-1.5 py-0 text-[10px]">Admin</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-start w-full">
+          <button class="flex w-full items-center gap-3 px-5 py-3 rounded-3xl justify-start hover:bg-gray-100">
+            <img src="../public/images/logout.svg" class="w-4 h-4" alt="Logout" />
+            <span class="text-[#b01111] text-sm">Log out</span>
+          </button>
+        </div>
+      </footer>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex flex-col lg:flex-row mt-4 lg:mt-[60px] w-full px-4 lg:pr-4 items-start content-start gap-4 pb-4">
+      <!-- Card 1 -->
+      <div class="flex flex-col w-full min-h-[200px] gap-2 p-6 bg-white rounded-2xl shadow-[0px_4px_4px_#00000040]">
+        <h2 class="font-semibold text-[#131313] text-lg lg:text-xl">Jumlah Tamu Pimpinan</h2>
+        <div class="flex items-baseline gap-2">
+          <div class="font-medium text-[#131313] text-4xl lg:text-5xl">15</div>
+          <img src="../public/images/trending-up.svg" alt="Up" class="w-6 h-6 lg:w-8 lg:h-8 text-green-500" />
+        </div>
+        <p class="text-[#454545] text-sm">Increase compared to last week</p>
+        <div class="pt-4">
+          <a href="#" class="flex items-center gap-1 text-[#724a00] text-sm hover:underline">
+            Data tamu pimpinan
+            <img src="../public/images/arrow-up-right.svg" class="w-3.5 h-3.5" alt="Link" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="flex flex-col w-full min-h-[200px] gap-2 p-6 bg-white rounded-2xl shadow-[0px_4px_4px_#00000040]">
+        <h2 class="font-semibold text-[#131313] text-lg lg:text-xl">Jumlah Tamu Kepaniteraan</h2>
+        <div class="flex items-baseline gap-2">
+          <div class="font-medium text-[#131313] text-4xl lg:text-5xl">15</div>
+          <img src="../public/images/trending-up.svg" alt="Up" class="w-6 h-6 lg:w-8 lg:h-8 text-green-500" />
+        </div>
+        <p class="text-[#454545] text-sm">Increase compared to last week</p>
+        <div class="pt-4">
+          <a href="#" class="flex items-center gap-1 text-[#724a00] text-sm hover:underline">
+            Data tamu kepaniteraan
+            <img src="../public/images/arrow-up-right.svg" class="w-3.5 h-3.5" alt="Link" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="flex flex-col w-full min-h-[200px] gap-2 p-6 bg-white rounded-2xl shadow-[0px_4px_4px_#00000040]">
+        <h2 class="font-semibold text-[#131313] text-lg lg:text-xl">Jumlah Tamu Kesekretariatan</h2>
+        <div class="flex items-baseline gap-2">
+          <div class="font-medium text-[#131313] text-4xl lg:text-5xl">15</div>
+          <img src="../public/images/trending-up.svg" alt="Up" class="w-6 h-6 lg:w-8 lg:h-8 text-green-500" />
+        </div>
+        <p class="text-[#454545] text-sm">Increase compared to last week</p>
+        <div class="pt-4">
+          <a href="#" class="flex items-center gap-1 text-[#724a00] text-sm hover:underline">
+            Data tamu kesekretariatan
+            <img src="../public/images/arrow-up-right.svg" class="w-3.5 h-3.5" alt="Link" />
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- JS for mobile menu -->
+    <script>
+      const btn = document.getElementById("menu-btn");
+      const icon = document.getElementById("menu-icon");
+      const nav = document.getElementById("nav");
+      const footer = document.getElementById("footer");
+      let open = false;
+
+      btn.addEventListener("click", () => {
+        open = !open;
+        if (open) {
+          nav.classList.remove("hidden");
+          footer.classList.remove("hidden");
+          icon.src = "../public/images/no-x.svg";
+        } else {
+          nav.classList.add("hidden");
+          footer.classList.add("hidden");
+          icon.src = "../public/images/menu.svg";
+        }
+      });
+    </script>
+  </body>
+</html>
