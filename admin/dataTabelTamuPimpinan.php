@@ -1,3 +1,29 @@
+<?php
+  include '../config/config.php';
+  include '../utils/session.php';
+  // --- QUERY UNTUK MENGAMBIL DATA SESUAI PERMINTAAN ---
+  // Memilih semua kolom yang Anda sebutkan
+  $sql = "SELECT 
+              t.tamu_id,
+              t.nama,
+              t.no_telpon,
+              t.instansi_asal,
+              t.alamat,
+              b.nama_bidang,
+              t.keperluan,
+              t.foto
+          FROM 
+              tamu t
+          JOIN 
+              bidang_tujuan b ON t.bidang_tujuan_id = b.bidang_tujuan_id
+          WHERE
+              b.nama_bidang = 'Pimpinan' -- Tetap filter hanya untuk pimpinan
+          ORDER BY 
+              t.tamu_id DESC"; // Mengurutkan berdasarkan ID terbaru
+
+  $result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -10,32 +36,6 @@
     <!-- Sidebar -->
     <?php
       include '../includes/sidebar.php';
-    ?>
-
-    <?php
-      include '../config/config.php';
-      include '../utils/session.php';
-      // --- QUERY UNTUK MENGAMBIL DATA SESUAI PERMINTAAN ---
-      // Memilih semua kolom yang Anda sebutkan
-      $sql = "SELECT 
-                  t.tamu_id,
-                  t.nama,
-                  t.no_telpon,
-                  t.instansi_asal,
-                  t.alamat,
-                  b.nama_bidang,
-                  t.keperluan,
-                  t.foto
-              FROM 
-                  tamu t
-              JOIN 
-                  bidang_tujuan b ON t.bidang_tujuan_id = b.bidang_tujuan_id
-              WHERE
-                  b.nama_bidang = 'Pimpinan' -- Tetap filter hanya untuk pimpinan
-              ORDER BY 
-                  t.tamu_id DESC"; // Mengurutkan berdasarkan ID terbaru
-
-      $result = $conn->query($sql);
     ?>
 
     <!-- Main Content -->
@@ -98,7 +98,7 @@
               <?php
                 }
               } else {
-                echo '<tr><td colspan="9" class="p-4 text-center text-gray-500">Belum ada data tamu untuk Pimpinan.</td></tr>';
+                echo '<tr><td colspan="9" class="p-4 text-center text-gray-500">Belum ada data tamu.</td></tr>';
               }
               ?>
             </tbody>

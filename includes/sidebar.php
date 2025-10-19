@@ -38,7 +38,9 @@
       <footer id="footer" class="hidden lg:flex flex-col items-center justify-end gap-3 pt-4 pb-6 px-2 self-stretch w-full">
         <div class="flex h-10 items-center gap-3 px-5 w-full">
           <div class="flex flex-col items-start justify-center gap-1">
-            <div class="font-medium text-sm text-[#131313]">Admin Satu</div>
+            <div class="font-medium text-sm text-[#131313]">
+                <?php echo htmlspecialchars($_SESSION['username']); ?>
+            </div>
             <div class="bg-[#ffcc70] rounded-3xl px-1.5 py-0 text-[10px]">Admin</div>
           </div>
         </div>
