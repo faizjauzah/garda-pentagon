@@ -14,7 +14,6 @@
 
     <?php
       include '../config/config.php';
-      include '../utils/session.php';
       // --- QUERY UNTUK MENGAMBIL DATA TAMU KEPANITERAAN ---
       $sql = "SELECT 
                   t.tamu_id,
@@ -41,17 +40,16 @@
     <main class="flex flex-col w-full px-4 py-6 lg:py-10 gap-6">
       <header class="flex justify-between items-center">
         <h1 class="text-2xl font-semibold text-[#131313]">Presensi Tamu Kepaniteraan</h1>
-        <button class="bg-[#1d4c08] hover:bg-[#163805] text-white rounded-3xl px-4 py-2 text-sm">+ Tambah Data</button>
+        <button class="bg-[#1d4c08] hover:bg-[#163805] text-white rounded-3xl px-4 py-2 text-sm font-medium">+ Tambah Data</button>
       </header>
 
-      <!-- Search and Filter -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden w-full sm:w-1/2">
+        <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden w-full sm:w-1/2 bg-white">
           <img src="../public/images/search.svg" alt="Search" class="w-5 h-5 mx-2 text-gray-500" />
           <input type="text" placeholder="Cari data tamu..." class="flex-1 p-2 outline-none text-sm" />
         </div>
         <div class="flex items-center gap-2">
-          <select class="border border-gray-300 rounded-lg p-2 text-sm text-gray-700">
+          <select class="border border-gray-300 rounded-lg p-2 text-sm text-gray-700 bg-white">
             <option>Filter Tanggal</option>
             <option>Hari ini</option>
             <option>Minggu ini</option>
@@ -60,56 +58,51 @@
         </div>
       </div>
 
-      <!-- Table Section -->
-      <div class="bg-white rounded-xl shadow-md overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead class="bg-[#1d4c08] text-white text-sm">
-            <tr>
-              <th class="p-3">No.</th>
-              <th class="p-3">ID Tamu</th>
-              <th class="p-3">Nama</th>
-              <th class="p-3">No. Telepon</th>
-              <th class="p-3">Instansi Asal</th>
-              <th class="p-3">Alamat</th>
-              <th class="p-3">Bidang Tujuan</th>
-              <th class="p-3">Keperluan</th>
-              <th class="p-3">Foto</th>
-            </tr>
-          </thead>
-          <tbody class="text-sm text-[#333333]">
-            <?php
-            if ($result->num_rows > 0) {
-              $nomor = 1; // Variabel untuk penomoran baris
-              while($row = $result->fetch_assoc()) {
-            ?>
-            <tr class="border-b hover:bg-gray-50">
-              <td class="p-3"><?php echo $nomor++; ?></td>
-              <td class="p-3"><?php echo htmlspecialchars($row["tamu_id"]); ?></td>
-              <td class="p-3"><?php echo htmlspecialchars($row["nama"]); ?></td>
-              <td class="p-3"><?php echo htmlspecialchars($row["no_telpon"]); ?></td>
-              <td class="p-3"><?php echo htmlspecialchars($row["instansi_asal"]); ?></td>
-              <td class="p-3"><?php echo htmlspecialchars($row["alamat"]); ?></td>
-              <td class="p-3"><?php echo htmlspecialchars($row["nama_bidang"]); ?></td>
-              <td class="p-3"><?php echo htmlspecialchars($row["keperluan"]); ?></td>
-              <td class="p-3">
-                <?php 
-                  // Menampilkan nama file foto, atau pesan jika kosong
-                  echo htmlspecialchars($row["foto"] ? $row["foto"] : 'Tidak ada foto'); 
-                ?>
-              </td>
-            </tr>
-            <?php
-              } // Akhir dari while loop
-            } else {
-              // Pesan jika tidak ada data, colspan disesuaikan menjadi 9
-              echo '<tr class="border-b"><td colspan="9" class="p-4 text-center text-gray-500">Belum ada data tamu untuk Pimpinan.</td></tr>';
-            }
-            ?>
-          </tbody>
-        </table>
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead class="bg-[#1d4c08] text-white text-xs uppercase tracking-wider">
+              <tr>
+                <th class="px-4 py-3">No.</th>
+                <th class="px-4 py-3">ID Tamu</th>
+                <th class="px-4 py-3">Nama</th>
+                <th class="px-4 py-3">No. Telepon</th>
+                <th class="px-4 py-3">Instansi Asal</th>
+                <th class="px-4 py-3">Alamat</th>
+                <th class="px-4 py-3">Bidang Tujuan</th>
+                <th class="px-4 py-3">Keperluan</th>
+                <th class="px-4 py-3">Foto</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm text-gray-700">
+              <?php
+              if ($result && $result->num_rows > 0) {
+                $nomor = 1;
+                while($row = $result->fetch_assoc()) {
+              ?>
+              <tr class="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+                <td class="px-4 py-3 whitespace-nowrap"><?php echo $nomor++; ?></td>
+                <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["tamu_id"]); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap font-medium text-gray-900"><?php echo htmlspecialchars($row["nama"]); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["no_telpon"]); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["instansi_asal"]); ?></td>
+                <td class="px-4 py-3"><?php echo htmlspecialchars($row["alamat"]); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["nama_bidang"]); ?></td>
+                <td class="px-4 py-3"><?php echo htmlspecialchars($row["keperluan"]); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap">
+                  <?php echo htmlspecialchars($row["foto"] ? $row["foto"] : 'Tidak ada foto'); ?>
+                </td>
+              </tr>
+              <?php
+                }
+              } else {
+                echo '<tr><td colspan="9" class="p-4 text-center text-gray-500">Belum ada data tamu untuk Pimpinan.</td></tr>';
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
       </div>
-
-      <!-- Pagination -->
       <div class="flex justify-between items-center mt-4">
         <p class="text-sm text-gray-500">Menampilkan <?php echo $result->num_rows; ?> dari <?php echo $result->num_rows; ?> data</p>
         <div class="flex items-center gap-2">
