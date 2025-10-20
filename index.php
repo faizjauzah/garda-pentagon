@@ -137,9 +137,9 @@
           </div>
 
           <div class="flex gap-4">
-            <a href="https://facebook.com" target="_blank"><img src="public/images/facebook.svg" alt="Facebook" class="w-6 h-6" /></a>
-            <a href="https://youtube.com" target="_blank"><img src="public/images/youtube.svg" alt="YouTube" class="w-6 h-6" /></a>
-            <a href="https://instagram.com" target="_blank"><img src="public/images/instagram.svg" alt="Instagram" class="w-6 h-6" /></a>
+            <a href="https://www.facebook.com/pta.gorontalo/" target="_blank"><img src="public/images/facebook.svg" alt="Facebook" class="w-6 h-6" /></a>
+            <a href="https://www.youtube.com/@pengadilanagamagorontalo9342/featured" target="_blank"><img src="public/images/youtube.svg" alt="YouTube" class="w-6 h-6" /></a>
+            <a href="https://www.instagram.com/pengadilan_agama_gorontalo/" target="_blank"><img src="public/images/instagram.svg" alt="Instagram" class="w-6 h-6" /></a>
             <a href="https://pa-gorontalo.go.id" target="_blank"><img src="public/images/globe.svg" alt="Website" class="w-6 h-6" /></a>
           </div>
         </div>
