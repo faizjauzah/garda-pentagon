@@ -35,16 +35,29 @@ if (!empty($base64Foto)) {
 }
 
 // Query insert dengan kolom baru
-$sql = "INSERT INTO tamu 
-        (nama, no_telpon, instansi_asal, alamat, bidang_tujuan_id, keperluan, tanggal_janji, metode_pertemuan, foto)
-        VALUES 
-        ('$nama', '$telepon', '$instansi', '$alamat', '$bidang_tujuan_id', '$keperluan', '$tanggal_janji', '$metode_pertemuan', '$namaFile')";
+$stmt = $conn->prepare("INSERT INTO tamu 
+  (nama, no_telpon, instansi_asal, alamat, bidang_tujuan_id, keperluan, tanggal_janji, metode_pertemuan, foto)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-if (mysqli_query($conn, $sql)) {
+$stmt->bind_param("ssssissss", 
+  $nama, 
+  $telepon, 
+  $instansi, 
+  $alamat, 
+  $bidang_tujuan_id, 
+  $keperluan, 
+  $tanggal_janji, 
+  $metode_pertemuan, 
+  $namaFile
+);
+
+if ($stmt->execute()) {
   echo "<script>alert('Data tamu berhasil disimpan'); window.location='../index.php';</script>";
 } else {
-  echo 'Error: ' . mysqli_error($conn);
+  echo "Error: " . $stmt->error;
 }
+
+$stmt->close();
 
 mysqli_close($conn);
 ?>
