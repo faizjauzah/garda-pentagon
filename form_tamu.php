@@ -97,6 +97,28 @@ if (!$bidangResult) {
 
           <!-- Right column -->
           <div class="flex flex-col gap-5">
+            <!-- Tanggal Janji Temu -->
+            <div class="flex flex-col gap-2.5">
+              <label for="tanggal_janji" class="font-semibold text-[#666666] text-base">Tanggal & Waktu Janji Temu</label>
+              <input type="date" id="tanggal_janji" name="tanggal_janji"
+                class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
+            </div>
+
+            <!-- Metode Pertemuan -->
+            <div class="flex flex-col gap-2.5">
+              <label class="font-semibold text-[#666666] text-base">Metode Pertemuan</label>
+              <div class="flex items-center gap-6">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="metode_pertemuan" value="online" class="w-4 h-4 text-[#1d4c08]" required />
+                  <span class="text-[#666666] text-base">Online</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="metode_pertemuan" value="offline" class="w-4 h-4 text-[#1d4c08]" required />
+                  <span class="text-[#666666] text-base">Offline</span>
+                </label>
+              </div>
+            </div>
+
             <label for="foto" class="font-semibold text-[#666666] text-base">Unggah Foto Diri</label>
 
             <label id="upload-area" class="relative flex flex-col items-center justify-center px-6 sm:px-10 py-6 sm:py-12 bg-white rounded-lg border border-dashed border-neutral-300 cursor-pointer transition hover:bg-gray-50 overflow-hidden min-h-[350px]">
@@ -106,15 +128,13 @@ if (!$bidangResult) {
               <input type="file" id="foto" name="foto" accept=".jpg,.jpeg,.png" class="hidden" />
             </label>
             <input type="hidden" name="base64_foto" id="base64_foto">
+            <p class="text-[#9c9c9c] text-sm">Format yang diterima adalah .jpg, .jpeg, dan .png</p>
 
             <!-- Tambahkan tombol kamera -->
             <div class="mt-3 text-center">
-              <button type="button" onclick="openCamera()" class="bg-[#1d4c08] hover:bg-[#256a10] text-white px-5 py-2 rounded-full text-sm transition">📷 Ambil dari Kamera</button>
+              <button type="button" onclick="openCamera()" class="bg-[#1d4c08] hover:bg-[#256a10] text-white px-5 py-2 rounded-full text-sm transition">Ambil dari Kamera</button>
             </div>
-            
 
-
-            <p class="text-[#9c9c9c] text-sm">Format yang diterima adalah .jpg, .jpeg, dan .png</p>
 
             <img src="public/images/divider-line.svg" alt="Divider" class="w-full h-px object-cover" />
             <!-- Alert container -->
@@ -127,10 +147,7 @@ if (!$bidangResult) {
       </div>
     </main>
 
-    <!-- JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
-    <script src = "public/js/main.js"></script>
-    <!-- <script src="public/js/alert.js"></script> -->
+    
     
     <!-- Modal Kamera -->
     <div id="modalCamera" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
@@ -157,5 +174,10 @@ if (!$bidangResult) {
         </div>
       </div>
     </div>
+
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+    <script src = "public/js/main.js"></script>
+    <!-- <script src="public/js/alert.js"></script> -->
   </body>
 </html>
