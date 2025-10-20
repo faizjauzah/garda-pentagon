@@ -3,7 +3,6 @@ const uploadArea = document.getElementById("upload-area");
   const uploadText = document.getElementById("upload-text");
   const previewImage = document.getElementById("preview-image");
 
-  // Warna area saat drag file
   uploadArea.addEventListener("dragover", (e) => {
     e.preventDefault();
     uploadArea.classList.add("bg-gray-100");
@@ -20,7 +19,6 @@ const uploadArea = document.getElementById("upload-area");
     updatePreview();
   });
 
-  // Saat file dipilih lewat klik
   fileInput.addEventListener("change", updatePreview);
 
   function updatePreview() {
@@ -28,7 +26,6 @@ const uploadArea = document.getElementById("upload-area");
     if (fileInput.files.length > 0) {
       const file = fileInput.files[0];
 
-      // 🔒 Validasi tipe file
       const validTypes = ["image/jpeg", "image/png", "image/jpg"];
       if (!validTypes.includes(file.type)) {
         alert("File yang diunggah harus berupa gambar (JPG atau PNG).");
@@ -40,7 +37,6 @@ const uploadArea = document.getElementById("upload-area");
         return;
       }
 
-      // ✅ Jika valid, tampilkan nama file & preview
       uploadText.textContent = "File terpilih: " + file.name;
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -51,10 +47,45 @@ const uploadArea = document.getElementById("upload-area");
       reader.readAsDataURL(file);
 
     } else {
-      // Reset jika tidak ada file
       uploadText.textContent = "Klik atau seret file ke area ini untuk mengunggah gambar";
       previewImage.src = "";
       previewImage.classList.add("hidden");
       document.getElementById("upload-icon").classList.remove("hidden");
     }
   }
+
+
+function openCamera() {
+  const modal = document.getElementById("modalCamera");
+  modal.classList.remove("hidden");
+
+  Webcam.set({
+    image_format: 'jpeg',
+    jpeg_quality: 90
+  });
+  Webcam.attach('#my_camera');
+}
+
+function closeCamera() {
+  const modal = document.getElementById("modalCamera");
+  modal.classList.add("hidden");
+  Webcam.reset();
+}
+
+function takeSnapshot() {
+  Webcam.snap(function(data_uri) {
+    const preview = document.getElementById("preview-image");
+    const uploadIcon = document.getElementById("upload-icon");
+    const uploadText = document.getElementById("upload-text");
+
+    preview.src = data_uri;
+    preview.classList.remove("hidden");
+    uploadIcon.classList.add("hidden");
+    uploadText.textContent = "Foto berhasil diambil dari kamera.";
+
+    document.getElementById("base64_foto").value = data_uri;
+
+    closeCamera();
+  });
+}
+
