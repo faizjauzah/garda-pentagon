@@ -3,3 +3,4 @@ public/css/output.css
 node_modules/
 utils/uploads/
 package-lock.json
+public/.DS_Store

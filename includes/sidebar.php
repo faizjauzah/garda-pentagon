@@ -1,4 +1,4 @@
-<aside class="flex lg:inline-flex w-full lg:w-[280px] lg:min-h-screen flex-col bg-white border-b lg:border-r lg:border-b-0 border-solid border-[#a7a6a6] lg:items-start sticky top-0 lg:static z-50">
+<aside class="fflex lg:inline-flex w-full lg:w-[280px] lg:h-screen flex-col bg-white border-b lg:border-r lg:border-b-0 border-solid border-[#a7a6a6] lg:items-start sticky top-0 z-50 lg:overflow-y-auto">
       <div class="relative w-full lg:w-[280px] h-[70px] lg:h-[106px] flex items-center justify-between lg:justify-start gap-2 px-4 lg:px-0">
         <div class="flex items-center gap-2">
           <img src="../public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="relative lg:absolute lg:top-4 lg:left-7 w-[40px] lg:w-[59px] h-[50px] lg:h-[73px] object-cover" />

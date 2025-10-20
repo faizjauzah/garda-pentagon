@@ -13,7 +13,7 @@ $foto       = $_FILES['foto'];
 $base64Foto = $_POST['base64_foto']; 
 
 $namaFile = "";
-$targetDir = "uploads/";
+$targetDir = "../public/uploads/";
 
 // Buat folder upload jika belum ada
 if (!is_dir($targetDir)) {
