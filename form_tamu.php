@@ -32,8 +32,6 @@ if (!$bidangResult) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buku Presensi Tamu Pimpinan</title>
     <link rel="stylesheet" href="public/css/output.css">
-    <!-- Flowbite CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
   </head>
   <body class="bg-white w-full min-h-screen flex flex-col">
     <!-- Header -->
@@ -48,16 +46,11 @@ if (!$bidangResult) {
     <!-- Main -->
     <main class="flex flex-col items-center px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
       <div class="w-full max-w-[1195px]">
-        <!-- Back button --> 
-        <button type="button" 
-        class="flex items-center gap-2 text-white bg-green-900 hover:bg-green-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 "
-        onclick="window.location.href='index.php';">          
-          <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-          </svg>
+        <!-- Back button -->        
+        <button onclick="window.location.href='index.php';" class="flex items-center gap-2 sm:gap-[17px] bg-[#1d4c08] hover:bg-[#1d4c08]/90 rounded-full h-9 sm:h-11 px-4 sm:px-[21px] mb-3 sm:mb-4 text-white transition-all duration-200">
+          <img src="public/images/arrow-2.svg" alt="Kembali" class="w-4 h-3 sm:w-[21px] sm:h-[14.73px]" />
           <span class="font-medium text-xs sm:text-sm">Kembali</span>
         </button>
-
         <!-- Title -->
         <h1 class="font-semibold text-black text-2xl sm:text-3xl lg:text-4xl text-center mb-8 sm:mb-12"><?= $judul; ?></h1>
         
@@ -67,30 +60,28 @@ if (!$bidangResult) {
           <div class="flex flex-col gap-5 sm:gap-6">
             <div class="flex flex-col gap-2.5">
               <label for="nama" class="font-semibold text-[#666666] text-base">Nama</label>
-              <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base"  />
+              <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
             </div>
 
             <div class="flex flex-col gap-2.5">
               <label for="telepon" class="font-semibold text-[#666666] text-base">No. Telepon / WhatsApp</label>
-              <input type="text" id="telepon" name="telepon" placeholder="Masukkan No. Telepon / WhatsApp" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" 
-              inputmode="numeric" pattern="^62\d{6,13}$"oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
-              
+              <input type="text" id="telepon" name="telepon" placeholder="Masukkan No. Telepon / WhatsApp" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
               <p class="text-[#666666] text-xs leading-[18px]">Nomor telepon harus diawali dengan kode negara. Contoh: 628123456789</p>
             </div>
 
             <div class="flex flex-col gap-2.5">
               <label for="instansi" class="font-semibold text-[#666666] text-base">Instansi Asal</label>
-              <input type="text" id="instansi" name="instansi" placeholder="Masukkan Instansi" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base"  />
+              <input type="text" id="instansi" name="instansi" placeholder="Masukkan Instansi" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
             </div>
 
             <div class="flex flex-col gap-2.5">
               <label for="alamat" class="font-semibold text-[#666666] text-base">Alamat</label>
-              <input type="text" id="alamat" name="alamat" placeholder="Masukkan Alamat" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base"  />
+              <input type="text" id="alamat" name="alamat" placeholder="Masukkan Alamat" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
             </div>
 
             <div class="flex flex-col gap-2.5">
               <label for="tujuan" class="font-semibold text-[#666666] text-base">Tujuan</label>
-              <select id="tujuan" name="tujuan" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" >
+              <select id="tujuan" name="tujuan" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required>
                 <option selected disabled>Pilih Tujuan</option>
                 <?php while ($b = mysqli_fetch_assoc($bidangResult)) { ?>
                   <option value="<?= $b['id_penerima']; ?>"><?= $b['jabatan']; ?></option>
@@ -100,7 +91,7 @@ if (!$bidangResult) {
 
             <div class="flex flex-col gap-2.5">
               <label for="keperluan" class="font-semibold text-[#666666] text-base">Keperluan</label>
-              <input type="text" id="keperluan" name="keperluan" placeholder="Masukkan Keperluan" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base"  />
+              <input type="text" id="keperluan" name="keperluan" placeholder="Masukkan Keperluan" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
             </div>
           </div>
 
@@ -108,29 +99,9 @@ if (!$bidangResult) {
           <div class="flex flex-col gap-5">
             <!-- Tanggal Janji Temu -->
             <div class="flex flex-col gap-2.5">
-              <label for="tanggal_janji" class="font-semibold text-[#666666] text-base">
-                Tanggal & Waktu Janji Temu
-              </label>
-
-              <!-- Bungkus absolute di dalam relative -->
-              <div class="relative w-full">
-                <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path
-                      d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                  </svg>
-                </div>
-
-                <input id="tanggal_janji"
-                  name="tanggal_janji"
-                  datepicker
-                  datepicker-autohide
-                  type="text"
-                  placeholder="Pilih tanggal"
-                  class="block w-full bg-white   border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-[#1d4c08] focus:border-[#1d4c08] ps-10 p-4"
-                   />
-              </div>
+              <label for="tanggal_janji" class="font-semibold text-[#666666] text-base">Tanggal & Waktu Janji Temu</label>
+              <input type="date" id="tanggal_janji" name="tanggal_janji"
+                class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
             </div>
 
             <!-- Metode Pertemuan -->
@@ -138,11 +109,11 @@ if (!$bidangResult) {
               <label class="font-semibold text-[#666666] text-base">Metode Pertemuan</label>
               <div class="flex items-center gap-6">
                 <label class="flex items-center gap-2">
-                  <input type="radio" name="metode_pertemuan" value="online" class="w-4 h-4 text-[#1d4c08]"  />
+                  <input type="radio" name="metode_pertemuan" value="online" class="w-4 h-4 text-[#1d4c08]" required />
                   <span class="text-[#666666] text-base">Online</span>
                 </label>
                 <label class="flex items-center gap-2">
-                  <input type="radio" name="metode_pertemuan" value="offline" class="w-4 h-4 text-[#1d4c08]"  />
+                  <input type="radio" name="metode_pertemuan" value="offline" class="w-4 h-4 text-[#1d4c08]" required />
                   <span class="text-[#666666] text-base">Offline</span>
                 </label>
               </div>
@@ -161,9 +132,7 @@ if (!$bidangResult) {
 
             <!-- Tambahkan tombol kamera -->
             <div class="mt-3 text-center">
-              <button type="button" onclick="openCamera()" class="text-white bg-green-900 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-900 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 ">Ambil dari Kamera</button>
-
-              <!-- <button type="button" onclick="openCamera()" class="bg-[#1d4c08] hover:bg-[#256a10] text-white px-5 py-2 rounded-full text-sm transition">Ambil dari Kamera</button> -->
+              <button type="button" onclick="openCamera()" class="bg-[#1d4c08] hover:bg-[#256a10] text-white px-5 py-2 rounded-full text-sm transition">Ambil dari Kamera</button>
             </div>
 
 
@@ -174,9 +143,7 @@ if (!$bidangResult) {
         </form>
 
         <!-- Submit -->
-        <button type="submit" form=formtamu class="w-full h-11 text-white bg-green-900 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-900 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Kirim</button>
-
-        <!-- <button type="submit" form=formtamu class="w-full h-11 bg-[#1d4c08] hover:bg-[#1d4c08]/90 rounded-[100px] text-white font-medium text-sm">Kirim</button> -->
+        <button type="submit" form=formtamu class="w-full h-11 bg-[#1d4c08] hover:bg-[#1d4c08]/90 rounded-[100px] text-white font-medium text-sm">Kirim</button>
       </div>
     </main>
 
@@ -195,14 +162,13 @@ if (!$bidangResult) {
         </div>
 
         <!-- Tombol Aksi (lebar menyesuaikan video) -->
-        <div class="flex gap-4 mt-4 w-full">
+        <div class="flex justify-between mt-4 w-full">
           <button onclick="closeCamera()" 
-            class="flex-1 bg-gray-100 text-[#1d4c08] px-4 py-2 rounded-full border border-[#1d4c08] hover:bg-green-900 hover:text-white transition font-medium text-sm">
+            class="bg-gray-100 text-[#1d4c08] px-4 py-2 rounded-full border border-[#1d4c08] hover:bg-[#1d4c08] hover:text-white transition w-[48%]">
             Batal
           </button>
-
-          <button type="button" onclick="takeSnapshot()" 
-            class="flex-1 text-white bg-green-900 hover:bg-green-700 font-medium rounded-full text-sm px-4 py-2 transition">
+          <button onclick="takeSnapshot()" 
+            class="bg-[#1d4c08] hover:bg-[#163b06] text-white px-4 py-2 rounded-full transition w-[48%]">
             Ambil Foto
           </button>
         </div>
@@ -210,9 +176,8 @@ if (!$bidangResult) {
     </div>
 
     <!-- JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
     <script src = "public/js/main.js"></script>
+    <!-- <script src="public/js/alert.js"></script> -->
   </body>
 </html>
