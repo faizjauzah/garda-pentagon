@@ -136,7 +136,11 @@
                 <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["no_telpon"]); ?></td>
                 <td class="px-4 py-3 max-w-sm break-words whitespace-normal"><?php echo htmlspecialchars($row["alamat"]); ?></td>
                 <td class="px-4 py-3 whitespace-nowrap">
-                  <?php echo htmlspecialchars($row["foto"] ? $row["foto"] : 'Tidak ada foto'); ?>
+                  <a href="../public/uploads/<?php echo htmlspecialchars($row["foto"]); ?>" 
+                    target="_blank" 
+                    class="text-blue-600 hover:text-blue-800 hover:underline">
+                    Lihat Foto
+                  </a>
                 </td>
               </tr>
               <?php
