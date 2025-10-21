@@ -124,28 +124,33 @@
               <tr class="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
                 <td class="px-4 py-3 whitespace-nowrap"><?php echo $nomor++; ?></td>
                 <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["tamu_id"]); ?></td>
-                <td class="px-4 py-3 whitespace-nowrap font-medium text-gray-900"><?php echo htmlspecialchars($row["nama"]); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap font-medium text-gray-900"><?php echo htmlspecialchars($row["nama"] ?: 'Belum ditentukan'); ?></td>
                 <td class="px-4 py-3 whitespace-nowrap">
-                  <?php echo htmlspecialchars($row["tanggal_janji"] ? date('d-m-Y', strtotime($row["tanggal_janji"])) : 'Belum ditentukan'); ?>
+                  <?php echo $row["tanggal_janji"] ? htmlspecialchars(date('d-m-Y', strtotime($row["tanggal_janji"]))) : 'Belum ditentukan'; ?>
                 </td>
                 <td class="px-4 py-3 whitespace-nowrap">
-                  <?php echo htmlspecialchars($row["metode_pertemuan"] ? ucfirst($row["metode_pertemuan"]) : 'Belum ditentukan'); ?>
+                  <?php echo $row["metode_pertemuan"] ? htmlspecialchars(ucfirst($row["metode_pertemuan"])) : 'Belum ditentukan'; ?>
                 </td>
-                <td class="px-4 py-3 max-w-sm break-words whitespace-normal"><?php echo htmlspecialchars($row["keperluan"]); ?></td>
-                <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["instansi_asal"]); ?></td>
-                <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["no_telpon"]); ?></td>
-                <td class="px-4 py-3 max-w-sm break-words whitespace-normal"><?php echo htmlspecialchars($row["alamat"]); ?></td>
+                <td class="px-4 py-3 max-w-sm break-words whitespace-normal"><?php echo htmlspecialchars($row["keperluan"] ?: 'Belum ditentukan'); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["instansi_asal"] ?: 'Belum ditentukan'); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["no_telpon"] ?: 'Belum ditentukan'); ?></td>
+                <td class="px-4 py-3 max-w-sm break-words whitespace-normal"><?php echo htmlspecialchars($row["alamat"] ?: 'Belum ditentukan'); ?></td>
                 <td class="px-4 py-3 whitespace-nowrap">
-                  <a href="../public/uploads/<?php echo htmlspecialchars($row["foto"]); ?>" 
-                    target="_blank" 
-                    class="text-blue-600 hover:text-blue-800 hover:underline">
-                    Lihat Foto
-                  </a>
+                  <?php if (!empty($row["foto"])): ?>
+                    <a href="../public/uploads/<?php echo htmlspecialchars($row["foto"]); ?>" 
+                       target="_blank" 
+                       class="text-blue-600 hover:text-blue-800 hover:underline">
+                      Lihat Foto
+                    </a>
+                  <?php else: ?>
+                    <span class="text-gray-500">Belum ditentukan</span>
+                  <?php endif; ?>
                 </td>
               </tr>
               <?php
                 }
               } else {
+                // Ini sudah benar untuk menangani JIKA TIDAK ADA DATA SAMA SEKALI (hasil query kosong)
                 echo '<tr><td colspan="10" class="p-4 text-center text-gray-500">Data tamu tidak ditemukan.</td></tr>';
               }
               ?>
