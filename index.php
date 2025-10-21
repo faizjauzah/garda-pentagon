@@ -32,7 +32,7 @@
     <!-- ============================= -->
     <!-- 🔹 HeroSection -->
     <!-- ============================= -->
-    <section id="home" class="relative w-full h-[500px] md:h-[700px] lg:h-[890px]">
+    <section id="home" class="flex flex-col w-full h-[500px] md:h-[700px]">
       <img src="public/images/rectangle-8.svg" alt="Background" class="absolute inset-0 w-full h-full object-cover" />
 
       <div class="relative flex flex-col justify-end h-full px-4 md:px-8 lg:px-[120px] pb-12 md:pb-20 lg:pb-[130px] max-w-[710px] gap-8 md:gap-12">
@@ -137,9 +137,9 @@
           </div>
 
           <div class="flex gap-4">
-            <a href="https://facebook.com" target="_blank"><img src="public/images/facebook.svg" alt="Facebook" class="w-6 h-6" /></a>
-            <a href="https://youtube.com" target="_blank"><img src="public/images/youtube.svg" alt="YouTube" class="w-6 h-6" /></a>
-            <a href="https://instagram.com" target="_blank"><img src="public/images/instagram.svg" alt="Instagram" class="w-6 h-6" /></a>
+            <a href="https://www.facebook.com/pta.gorontalo/" target="_blank"><img src="public/images/facebook.svg" alt="Facebook" class="w-6 h-6" /></a>
+            <a href="https://www.youtube.com/@pengadilanagamagorontalo9342/featured" target="_blank"><img src="public/images/youtube.svg" alt="YouTube" class="w-6 h-6" /></a>
+            <a href="https://www.instagram.com/pengadilan_agama_gorontalo/" target="_blank"><img src="public/images/instagram.svg" alt="Instagram" class="w-6 h-6" /></a>
             <a href="https://pa-gorontalo.go.id" target="_blank"><img src="public/images/globe.svg" alt="Website" class="w-6 h-6" /></a>
           </div>
         </div>
