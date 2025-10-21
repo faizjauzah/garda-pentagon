@@ -32,7 +32,7 @@
     <!-- ============================= -->
     <!-- 🔹 HeroSection -->
     <!-- ============================= -->
-    <section id="home" class="relative w-full h-[500px] md:h-[700px] lg:h-[890px]">
+    <section id="home" class="flex flex-col w-full h-[500px] md:h-[700px]">
       <img src="public/images/rectangle-8.svg" alt="Background" class="absolute inset-0 w-full h-full object-cover" />
 
       <div class="relative flex flex-col justify-end h-full px-4 md:px-8 lg:px-[120px] pb-12 md:pb-20 lg:pb-[130px] max-w-[710px] gap-8 md:gap-12">
