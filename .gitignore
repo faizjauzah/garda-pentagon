@@ -1,5 +1,6 @@
 .DS_Store
 public/css/output.css
 node_modules/
-utils/uploads/
+public/uploads/
 package-lock.json
+public/.DS_Store
