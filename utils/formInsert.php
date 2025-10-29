@@ -63,7 +63,7 @@ if ($stmt->execute()) {
   // Data berhasil disimpan. Sekarang siapkan redirect WA.
 
   // 1. Tentukan Nomor Admin
-  $nomor_admin_wa = '6281228730052'; // Sesuai permintaan Anda
+  $nomor_admin_wa = '628114312250'; // Sesuai permintaan Anda
 
   // 2. Dapatkan NAMA BIDANG berdasarkan ID
   $nama_bidang = 'Tidak diketahui';
