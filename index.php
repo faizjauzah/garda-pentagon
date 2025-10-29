@@ -16,7 +16,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('public/images/rectangle-8.svg');
+        background-image: url('public/images/gedung-depan.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -24,6 +24,11 @@
         pointer-events: none;
       "
     ></div>
+
+    <!-- [MODIFIED] Overlay gradien sekarang 'fixed', 'z-0', dan punya tinggi -->
+    <!-- Dia tidak lagi di dalam <section id="home"> -->
+    <div class="fixed inset-0 w-full h-full bg-gradient-to-r from-black/70 to-transparent z-0"></div>
+
     <!-- ============================= -->
     <!-- 🔹 NavigationBarSection -->
     <!-- ============================= -->
@@ -31,29 +36,26 @@
       class="sticky top-0 z-50 w-full min-h-[80px] md:min-h-[100px] lg:h-[115px] flex items-center justify-between gap-4 md:gap-0 py-4 px-4 md:px-8 lg:px-[120px] bg-[#ffffff80] shadow-[0px_4px_9px_#00000040] backdrop-blur-[2px] backdrop-brightness-[110%]"
     >
       <div class="flex items-center justify-center md:justify-start">
-        <!-- <img src="public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="h-12 w-auto md:h-[73px] md:w-auto ml-0 md:ml-8 lg:ml-[120px]" />
-        <img src="public/images/pan-rb-qdw0uf2dup27vg4nbkjrrm75c0xvmz2s0pbnrvyh3o-1.png" alt="Pan RB" class="w-12 h-12 md:w-[73px] md:h-[73px] ml-3 md:ml-5" />
-        <img src="public/images/logo-berakhlak-1024x390-1.png" alt="Logo berakhlak" class="w-24 h-9 md:w-[142px] md:h-[54px] ml-2 md:ml-[13px]" /> -->
         <img src="public/images/logo-semua.png" alt="Logo" class="h-12 w-auto md:h-[73px] md:w-auto ml-0 md:ml-8 lg:ml-[120px]" />
       </div>
 
       <!-- Desktop Navigation (Hidden on Mobile) -->
-        <nav class="hidden md:flex items-center justify-center bg-[#f9f9f9] rounded-[400px] px-6 py-3">
-          <ul class="flex items-center gap-8 text-black">
-            <li><a href="#home" class="hover:opacity-70 transition-opacity">Home</a></li>
-            <li><a href="#presensi" class="hover:opacity-70 transition-opacity">Presensi</a></li>
-            <li><a href="#panduan" class="hover:opacity-70 transition-opacity">Panduan</a></li>
-          </ul>
-        </nav>
+      <nav class="hidden md:flex items-center justify-center bg-[#f9f9f9] rounded-[400px] px-6 py-3">
+        <ul class="flex items-center gap-8 text-black">
+          <li><a href="#home" class="hover:opacity-70 transition-opacity">Home</a></li>
+          <li><a href="#presensi" class="hover:opacity-70 transition-opacity">Presensi</a></li>
+          <li><a href="#panduan" class="hover:opacity-70 transition-opacity">Panduan</a></li>
+        </ul>
+      </nav>
 
-        <!-- Hamburger Button (Visible on Mobile) -->
-        <div class="md:hidden">
-          <button id="hamburger-button" class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+      <!-- Hamburger Button (Visible on Mobile) -->
+      <div class="md:hidden">
+        <button id="hamburger-button" class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
       </div>
 
       <!-- Mobile Menu (Hidden by default) -->
@@ -69,14 +71,53 @@
     <!-- ============================= -->
     <!-- 🔹 HeroSection -->
     <!-- ============================= -->
-    <section id="home" class="relative w-full h-[500px] md:h-[700px] lg:h-[890px]">
-      <div class="relative flex flex-col justify-end h-full px-4 md:px-8 lg:px-[120px] pb-12 md:pb-20 lg:pb-[130px] max-w-[710px] gap-8 md:gap-12">
-        <h1 class="text-white text-4xl md:text-6xl lg:text-8xl font-semibold">GARDA PENTAGON</h1>
-        <p class="text-[#d9d9d9] text-base md:text-xl lg:text-2xl max-w-[620px]">Guest and Administration Pengadilan Agama Gorontalo</p>
+    <!-- [MODIFIED] Section 'home' harus 'relative' -->
+    <section id="home" class="relative w-full h-[500px] md:h-[700px] lg:h-[890px] z-10">
+      
+      <!-- [MODIFIED] Tanggal dipindah ke sini dengan 'absolute' -->
+      <!-- 'pt-8' adalah margin dari navbar -->
+      <!-- 'px...' adalah margin dari sisi kanan agar sejajar konten -->
+      <!-- [MODIFIED] Ditambahkan 'z-10' agar di atas overlay -->
+      <div class="absolute z-10 top-0 right-0 w-full pt-8 px-4 md:px-8 lg:px-[120px]">
+        <!-- [MODIFIED] Font size diubah dari text-base md:text-lg ke text-lg md:text-xl -->
+        <p id="tanggal-dinamis" class="text-white text-lg md:text-xl font-medium text-right">Memuat tanggal...</p>
+      </div>
 
-        <div class="flex flex-col sm:flex-row gap-4 mt-4">
-          <a href="#presensi" class="px-5 py-3 rounded-[100px] bg-gradient-to-b from-[#fbfbfe] to-[#f1f2f9] border border-[#d9dbe9] text-[#170f49] hover:opacity-90 text-sm font-medium">Presensi Tamu</a>
-          <a href="#panduan" class="px-5 py-3 rounded-[100px] border border-white text-white hover:bg-white hover:text-[#170f49] transition text-sm font-medium">Panduan Pengisian Presensi</a>
+      <!-- [MODIFIED] Konten utama kembali menggunakan 'justify-end' -->
+      <!-- [MODIFIED] max-w-710px dan gap dihapus agar bisa memuat grid 2 kolom -->
+      <div class="relative flex flex-col justify-end h-full px-4 md:px-8 lg:px-[120px] pb-12 md:pb-20 lg:pb-[130px]">
+        
+        <!-- (Div tanggal yang lama sudah dipindah ke atas) -->
+
+        <!-- [NEW] Grid 2-kolom (col-6, col-6) untuk teks dan gambar -->
+        <!-- [MODIFIED] Ditambahkan 'max-w-7xl' dan 'mx-auto' untuk me-center di layar lebar -->
+        <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+
+          <!-- [Kolom 1: Teks] -->
+          <!-- [MODIFIED] Kelas 'order' dihapus -->
+          <div class="flex flex-col gap-8 md:gap-12">
+            <p class="text-white text-base md:text-xl lg:text-2xl">Selamat Datang di</p>
+            <h1 class="text-white text-4xl md:text-6xl lg:text-8xl font-semibold">GARDA PENTAGON</h1>
+            <!-- [MODIFIED] max-w-620px dihapus dari sini -->
+            <p class="text-[#d9d9d9] text-base md:text-xl lg:text-2xl">Guest and Administration Pengadilan Agama Gorontalo</p>
+
+            <div class="flex flex-col sm:flex-row gap-4 mt-4">
+              <a href="#presensi" class="px-5 py-3 rounded-[100px] bg-gradient-to-b from-[#fbfbfe] to-[#f1f2f9] border border-[#d9dbe9] text-[#170f49] hover:opacity-90 text-sm font-medium">Presensi Tamu</a>
+              <a href="#panduan" class="px-5 py-3 rounded-[100px] border border-white text-white hover:bg-white hover:text-[#170f49] transition text-sm font-medium">Panduan Pengisian Presensi</a>
+            </div>
+          </div>
+
+          <!-- [Kolom 2: Gambar] (BARU) -->
+          <!-- Ganti 'src' di bawah ini dengan path gambar Anda -->
+          <!-- [MODIFIED] 'hidden lg:block' dipertahankan, ditambah 'flex justify-end items-center' -->
+          <div class="w-full hidden lg:block flex justify-end items-center">
+            <img 
+              src="public/images/ilustrasi-garda-pentagon.png" 
+              alt="Ilustrasi Garda Pentagon" 
+              class="w-full max-w-xl h-auto rounded-xl object-cover"
+            >
+          </div>
+
         </div>
       </div>
     </section>
@@ -84,7 +125,7 @@
     <!-- ============================= -->
     <!-- 🔹 Presensi Section (from Desktop.tsx) -->
     <!-- ============================= -->
-    <section id="presensi" class="relative w-full flex flex-col items-center py-16 px-4 md:px-8 lg:px-[123px] bg-white">
+    <section id="presensi" class="relative w-full flex flex-col items-center py-16 px-4 md:px-8 lg:px-[123px] bg-white z-10">
       <h1 class="text-3xl md:text-5xl lg:text-[64px] font-semibold text-center mb-20">Presensi Tamu</h1>
 
       <div class="flex justify-center w-full">
@@ -106,7 +147,7 @@
     <!-- ============================= -->
     <!-- 🔹 GuestInfoSection -->
     <!-- ============================= -->
-    <section id="panduan" class="relative w-full py-16" style="background-color: #d1dbcd;">
+    <section id="panduan" class="relative w-full py-16 z-10" style="background-color: #d1dbcd;">
       <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6">
         <div class="flex flex-col gap-6">
           <h2 class="text-3xl md:text-5xl font-semibold text-black">Panduan Pengisian</h2>
@@ -168,25 +209,41 @@
       </div>
     </footer>
 
-    <!-- JavaScript for Hamburger Menu -->
+    <!-- JavaScript (Tidak ada perubahan di sini) -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        // Kode menu hamburger
         const hamburgerButton = document.getElementById('hamburger-button');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuLinks = mobileMenu.querySelectorAll('a');
 
-        // Toggle menu visibility
         hamburgerButton.addEventListener('click', () => {
           mobileMenu.classList.toggle('hidden');
         });
 
-        // Close menu when a link is clicked
         menuLinks.forEach(link => {
           link.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
           });
         });
+
+        // Kode untuk tanggal dinamis
+        const tanggalElement = document.getElementById('tanggal-dinamis');
+        if (tanggalElement) { // Cek apakah elemennya ada
+          const today = new Date();
+          const options = {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          };
+          // Menggunakan locale 'id-ID' untuk Bahasa Indonesia
+          const formattedDate = today.toLocaleDateString('id-ID', options);
+          
+          tanggalElement.textContent = `${formattedDate}`;
+        }
       });
     </script>
   </body>
 </html>
+

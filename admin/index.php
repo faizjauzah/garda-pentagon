@@ -13,7 +13,7 @@ session_start();
         body {
             /* Ganti 'path/ke/gambar-anda.jpg' dengan lokasi gambar Anda */
             /* Contoh: '../public/images/background.jpg' */
-            background-image: url('../public/images/background-login.jpg');
+            background-image: url('../public/images/meja-resepsionis.png');
             
             /* Properti tambahan agar gambar terlihat bagus */
             background-size: cover; /* Membuat gambar menutupi seluruh layar */
