@@ -6,6 +6,29 @@
     <title>Garda Pentagon - Pengadilan Agama Gorontalo</title>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="public/css/output.css" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+      /* Warna tombol default putih */
+      .swiper-button-next,
+      .swiper-button-prev {
+        color: white !important;
+        transition: color 0.3s ease;
+      }
+
+      /* Warna tombol saat di-hover */
+      .swiper-button-next:hover,
+      .swiper-button-prev:hover {
+        color:  #16a34a !important; /* hijau tua sesuai tema situsmu */
+      }
+
+      /* (Opsional) Sedikit bayangan agar tombol tampak lebih jelas di atas gambar */
+      .swiper-button-next::after,
+      .swiper-button-prev::after {
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+        font-size: 26px;
+      }
+    </style>
   </head>
 
   <body class="bg-white flex flex-col w-full">
@@ -177,6 +200,50 @@
     </section>
 
     <!-- ============================= -->
+    <!-- 🔹 GaleryCarouselSection -->
+    <!-- ============================= -->
+    <section class="w-full flex flex-col lg:flex-row items-stretch min-h-[400px] lg:h-[600px] bg-black">
+      <!-- 🔹 Bagian Kiri -->
+      <div
+        class="w-full lg:w-1/2 flex flex-col justify-center text-white p-12 bg-cover bg-center relative h-[400px] lg:h-auto"
+        style="background-image: url('public/images/galery/bg-batik.png');"
+      >
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative z-10 space-y-4">
+          <p class="text-sm uppercase text-gray-300 tracking-wider">Spotlight</p>
+          <h2 class="text-4xl font-bold leading-tight">Lensa Garda Pentagon</h2>
+          <p class="max-w-md text-gray-200">
+            Galeri ini menampilkan dokumentasi kunjungan resmi, kegiatan kelembagaan, dan momen bersejarah yang 
+            memperkuat citra Pengadilan Tinggi Agama Gorontalo sebagai lembaga yang melayani dengan penuh tanggung jawab dan keramahan.
+          </p>
+        </div>
+      </div>
+
+      <!-- 🔹 Bagian Kanan -->
+      <div class="w-full lg:w-1/2 h-[300px] sm:h-[400px] lg:h-auto mt-4 lg:mt-0">
+        <div class="swiper mySwiper w-full h-full overflow-hidden" style="--swiper-navigation-color: #16a34a; --swiper-pagination-color: #16a34a;">
+          <div class="swiper-wrapper h-full">
+            <div class="swiper-slide h-full"><img src="public/images/galery/galery1.jpg" class="w-full h-full object-cover" /></div>
+            <div class="swiper-slide h-full"><img src="public/images/galery/galery2.jpg" class="w-full h-full object-cover" /></div>
+            <div class="swiper-slide h-full"><img src="public/images/galery/galery3.jpg" class="w-full h-full object-cover" /></div>
+            <div class="swiper-slide h-full"><img src="public/images/galery/galery4.jpg" class="w-full h-full object-cover" /></div>
+            <div class="swiper-slide h-full"><img src="public/images/galery/galery5.jpg" class="w-full h-full object-cover" /></div>
+            <div class="swiper-slide h-full"><img src="public/images/galery/galery6.png" class="w-full h-full object-cover" /></div>
+            <div class="swiper-slide h-full"><img src="public/images/galery/galery7.jpeg" class="w-full h-full object-cover" /></div>
+            <div class="swiper-slide h-full"><img src="public/images/galery/galery8.jpeg" class="w-full h-full object-cover" /></div>
+          </div>
+
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next text-white hover:text-gray-300 transition"></div>
+          <div class="swiper-button-prev text-white hover:text-gray-300 transition"></div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <!-- ============================= -->
     <!-- 🔹 FooterSection -->
     <!-- ============================= -->
     <footer class="w-full bg-white py-8 z-10">
@@ -242,6 +309,23 @@
           
           tanggalElement.textContent = `${formattedDate}`;
         }
+      });
+    </script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
       });
     </script>
   </body>
