@@ -1,23 +1,19 @@
 <?php
 include '../config/config.php';
 
-// Menampilkan error jika ada (untuk debugging)
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// PENTING: Matikan 'display_errors' agar tidak mengganggu 'header()' redirect
+// Menampilkan error akan menyebabkan error "Headers already sent"
+ini_set('display_errors', 0); // Ubah dari 1 ke 0
+error_reporting(0); // Matikan reporting
+// Anda bisa nyalakan lagi jika butuh debugging
 
 $nama       = $_POST['nama'];
 $telepon    = $_POST['telepon'];
 $instansi   = $_POST['instansi'];
 $alamat     = $_POST['alamat'];
 $keperluan  = $_POST['keperluan'];
-
-// --- PERBAIKAN LOGIKA ---
-// Ambil ID departemen (1, 2, atau 3) dari input hidden
 $bidang_tujuan_id = $_POST['bidang_id']; 
-// Ambil ID orang (misal: 20) dari dropdown
 $penerima_tamu_id = $_POST['tujuan']; 
-// --- AKHIR PERBAIKAN ---
-
 $tanggal_janji = $_POST['tanggal_janji'];
 $metode_pertemuan = $_POST['metode_pertemuan'];
 $foto       = $_FILES['foto'];
@@ -26,12 +22,10 @@ $base64Foto = $_POST['base64_foto'];
 $namaFile = "";
 $targetDir = "../public/uploads/";
 
-// Buat folder upload jika belum ada
 if (!is_dir($targetDir)) {
   mkdir($targetDir, 0777, true);
 }
 
-// Simpan gambar dari kamera atau upload file biasa
 if (!empty($base64Foto)) {
   $imgData = preg_replace('#^data:image/\w+;base64,#i', '', $base64Foto);
   $data = base64_decode($imgData);
@@ -45,33 +39,100 @@ if (!empty($base64Foto)) {
   move_uploaded_file($foto['tmp_name'], $targetFile);
 }
 
-// --- PERBAIKAN QUERY ---
-// Tambahkan kolom baru 'penerima_tamu_id' ke query INSERT
 $stmt = $conn->prepare("INSERT INTO tamu 
   (nama, no_telpon, instansi_asal, alamat, bidang_tujuan_id, penerima_tamu_id, keperluan, tanggal_janji, metode_pertemuan, foto)
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-// Ubah bind_param menjadi "sssiisssss" (10 parameter)
 $stmt->bind_param("ssssiissss", 
   $nama, 
   $telepon, 
   $instansi, 
   $alamat, 
-  $bidang_tujuan_id,  // Ini sekarang 1, 2, or 3
-  $penerima_tamu_id,  // Ini ID orangnya
+  $bidang_tujuan_id,
+  $penerima_tamu_id,
   $keperluan, 
   $tanggal_janji, 
   $metode_pertemuan, 
   $namaFile
 );
-// --- AKHIR PERBAIKAN ---
 
+// ========================================================
+// 🔹 MODIFIKASI DIMULAI DI SINI 🔹
+// ========================================================
 if ($stmt->execute()) {
-  echo "<script>alert('Data tamu berhasil disimpan'); window.location='../index.php';</script>";
+  // Data berhasil disimpan. Sekarang siapkan redirect WA.
+
+  // 1. Tentukan Nomor Admin
+  $nomor_admin_wa = '6281228730052'; // Sesuai permintaan Anda
+
+  // 2. Dapatkan NAMA BIDANG berdasarkan ID
+  $nama_bidang = 'Tidak diketahui';
+  if ($bidang_tujuan_id == 1) {
+      $nama_bidang = 'Pimpinan';
+  } elseif ($bidang_tujuan_id == 2) {
+      $nama_bidang = 'Kepaniteraan';
+  } elseif ($bidang_tujuan_id == 3) {
+      $nama_bidang = 'Kesekretariatan';
+  }
+
+  // 3. Dapatkan NAMA TUJUAN (Penerima) berdasarkan ID
+  $nama_tujuan = 'Tidak diketahui';
+  $stmt_tujuan = $conn->prepare("SELECT nama_penerima, jabatan FROM penerima_tamu WHERE id_penerima = ?");
+  $stmt_tujuan->bind_param("i", $penerima_tamu_id);
+  $stmt_tujuan->execute();
+  $result_tujuan = $stmt_tujuan->get_result();
+  
+  if ($row_tujuan = $result_tujuan->fetch_assoc()) {
+      $nama_tujuan = $row_tujuan['jabatan'] . ' - ' . $row_tujuan['nama_penerima'];
+  }
+  $stmt_tujuan->close();
+
+  // 4. Format data lain
+  $metode = ucwords($metode_pertemuan); // Jadi 'Online' or 'Offline'
+  
+  // 5. Buat template pesan (\n = baris baru di WA)
+  $pesan_template = "
+*Konfirmasi Janji Temu Tamu*
+\n\n
+Mohon izin, saya telah mengisi buku tamu digital dengan data sebagai berikut:
+\n\n
+*Nama:* $nama
+*No. Telepon/WA:* $telepon
+*Instansi Asal:* $instansi
+\n\n
+*Bidang Tujuan:* $nama_bidang
+*Bertemu dengan:* $nama_tujuan
+*Keperluan:* $keperluan
+*Tanggal Janji:* $tanggal_janji
+*Metode:* $metode
+\n\n
+Mohon untuk dapat diteruskan kepada yang bersangkutan.
+\n
+Terima kasih.
+";
+  
+  // Rapikan pesan (hapus spasi/tab di awal baris)
+  $pesan_template_clean = trim(preg_replace('/^\s+/m', '', $pesan_template));
+
+  // 6. Buat URL WhatsApp
+  $wa_url = 'https://wa.me/' . $nomor_admin_wa . '?text=' . urlencode($pesan_template_clean);
+
+  // 7. Redirect pengguna ke URL WhatsApp
+  // PERHATIAN: Pastikan tidak ada 'echo' atau HTML sebelum baris ini
+  header('Location: ' . $wa_url);
+  
+  // 8. Wajib ada exit; setelah header location
+  exit; 
+
 } else {
-  // Tampilkan error database jika gagal
+  // Jika GAGAL, baru tampilkan error
+  ini_set('display_errors', 1); // Nyalakan error lagi untuk debugging
+  error_reporting(E_ALL);
   echo "Error: " . $stmt->error;
 }
+// ========================================================
+// 🔹 MODIFIKASI SELESAI 🔹
+// ========================================================
 
 $stmt->close();
 mysqli_close($conn);
