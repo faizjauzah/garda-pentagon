@@ -47,7 +47,7 @@ if (!$bidangResult) {
     <main class="flex flex-col items-center px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
       <div class="w-full max-w-[1195px]">
         <!-- Back button -->        
-        <button onclick="window.location.href='index.php';" class="flex items-center gap-2 sm:gap-[17px] bg-[#1d4c08] hover:bg-[#1d4c08]/90 rounded-full h-9 sm:h-11 px-4 sm:px-[21px] mb-3 sm:mb-4 text-white transition-all duration-200">
+        <button onclick="window.location.href='index.php';" class="flex items-center gap-2 sm:gap-[17px] bg-[#1d4c08] hover:bg-[#256a10] rounded-full h-9 sm:h-11 px-4 sm:px-[21px] mb-3 sm:mb-4 text-white transition-all duration-200">
           <img src="public/images/arrow-2.svg" alt="Kembali" class="w-4 h-3 sm:w-[21px] sm:h-[14.73px]" />
           <span class="font-medium text-xs sm:text-sm">Kembali</span>
         </button>
@@ -56,6 +56,7 @@ if (!$bidangResult) {
         
         <!-- Form -->
         <form id=formtamu class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[46px] mb-8 sm:mb-12" enctype="multipart/form-data" method="POST" action="utils/formInsert.php">
+          <input type="hidden" name="bidang_id" value="<?= $id_bidang; ?>">
           <!-- Left column -->
           <div class="flex flex-col gap-5 sm:gap-6">
             <div class="flex flex-col gap-2.5">
@@ -65,7 +66,7 @@ if (!$bidangResult) {
 
             <div class="flex flex-col gap-2.5">
               <label for="telepon" class="font-semibold text-[#666666] text-base">No. Telepon / WhatsApp</label>
-              <input type="text" id="telepon" name="telepon" placeholder="Masukkan No. Telepon / WhatsApp" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
+              <input type="text" id="telepon" name="telepon" placeholder="Masukkan No. Telepon / WhatsApp" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" inputmode="numeric" pattern="^62\d{6,13}$"oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
               <p class="text-[#666666] text-xs leading-[18px]">Nomor telepon harus diawali dengan kode negara. Contoh: 628123456789</p>
             </div>
 
@@ -84,7 +85,7 @@ if (!$bidangResult) {
               <select id="tujuan" name="tujuan" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required>
                 <option selected disabled>Pilih Tujuan</option>
                 <?php while ($b = mysqli_fetch_assoc($bidangResult)) { ?>
-                  <option value="<?= $b['id_penerima']; ?>"><?= $b['jabatan']; ?></option>
+                  <option value="<?= $b['id_penerima']; ?>"><?= $b['jabatan']; ?> - <?= $b['nama_penerima']; ?></option>
                   <?php } ?>
               </select>
             </div>
@@ -143,7 +144,7 @@ if (!$bidangResult) {
         </form>
 
         <!-- Submit -->
-        <button type="submit" form=formtamu class="w-full h-11 bg-[#1d4c08] hover:bg-[#1d4c08]/90 rounded-[100px] text-white font-medium text-sm">Kirim</button>
+        <button type="submit" form=formtamu class="w-full h-11 bg-[#1d4c08] hover:bg-[#256a10] rounded-[100px] text-white font-medium text-sm">Kirim</button>
       </div>
     </main>
 

@@ -4,15 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Garda Pentagon - Pengadilan Agama Gorontalo</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="public/css/output.css" />
   </head>
 
   <body class="bg-white flex flex-col w-full">
+    <div
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('public/images/rectangle-8.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: -1;
+        pointer-events: none;
+      "
+    ></div>
     <!-- ============================= -->
     <!-- 🔹 NavigationBarSection -->
     <!-- ============================= -->
     <header
-      class="sticky top-0 z-50 w-full min-h-[80px] md:min-h-[100px] lg:h-[115px] flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 py-4 px-4 md:px-8 lg:px-[120px] bg-[#ffffff80] shadow-[0px_4px_9px_#00000040] backdrop-blur-[2px] backdrop-brightness-[110%]"
+      class="sticky top-0 z-50 w-full min-h-[80px] md:min-h-[100px] lg:h-[115px] flex items-center justify-between gap-4 md:gap-0 py-4 px-4 md:px-8 lg:px-[120px] bg-[#ffffff80] shadow-[0px_4px_9px_#00000040] backdrop-blur-[2px] backdrop-brightness-[110%]"
     >
       <div class="flex items-center justify-center md:justify-start">
         <img src="public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="w-10 h-12 md:w-[59px] md:h-[73px] ml-0 md:ml-8 lg:ml-[120px]" />
@@ -20,21 +36,39 @@
         <img src="public/images/logo-berakhlak-1024x390-1.png" alt="Logo berakhlak" class="w-24 h-9 md:w-[142px] md:h-[54px] ml-2 md:ml-[13px]" />
       </div>
 
-      <nav class="flex items-center justify-center bg-[#f9f9f9] rounded-[400px] px-6 py-3">
-        <ul class="flex items-center gap-8 text-black">
-          <li><a href="#home" class="hover:opacity-70 transition-opacity">Home</a></li>
-          <li><a href="#presensi" class="hover:opacity-70 transition-opacity">Presensi</a></li>
-          <li><a href="#panduan" class="hover:opacity-70 transition-opacity">Panduan</a></li>
+      <!-- Desktop Navigation (Hidden on Mobile) -->
+        <nav class="hidden md:flex items-center justify-center bg-[#f9f9f9] rounded-[400px] px-6 py-3">
+          <ul class="flex items-center gap-8 text-black">
+            <li><a href="#home" class="hover:opacity-70 transition-opacity">Home</a></li>
+            <li><a href="#presensi" class="hover:opacity-70 transition-opacity">Presensi</a></li>
+            <li><a href="#panduan" class="hover:opacity-70 transition-opacity">Panduan</a></li>
+          </ul>
+        </nav>
+
+        <!-- Hamburger Button (Visible on Mobile) -->
+        <div class="md:hidden">
+          <button id="hamburger-button" class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (Hidden by default) -->
+      <div id="mobile-menu" class="hidden md:hidden absolute top-full right-0 w-full bg-white shadow-lg">
+        <ul class="flex flex-col gap-4 py-4">
+          <li><a href="#home" class="block w-full text-center py-2 hover:bg-gray-100">Home</a></li>
+          <li><a href="#presensi" class="block w-full text-center py-2 hover:bg-gray-100">Presensi</a></li>
+          <li><a href="#panduan" class="block w-full text-center py-2 hover:bg-gray-100">Panduan</a></li>
         </ul>
-      </nav>
+      </div>
     </header>
 
     <!-- ============================= -->
     <!-- 🔹 HeroSection -->
     <!-- ============================= -->
     <section id="home" class="relative w-full h-[500px] md:h-[700px] lg:h-[890px]">
-      <img src="public/images/rectangle-8.svg" alt="Background" class="absolute inset-0 w-full h-full object-cover" />
-
       <div class="relative flex flex-col justify-end h-full px-4 md:px-8 lg:px-[120px] pb-12 md:pb-20 lg:pb-[130px] max-w-[710px] gap-8 md:gap-12">
         <h1 class="text-white text-4xl md:text-6xl lg:text-8xl font-semibold">GARDA PENTAGON</h1>
         <p class="text-[#d9d9d9] text-base md:text-xl lg:text-2xl max-w-[620px]">Guest and Administration Pengadilan Agama Gorontalo</p>
@@ -49,7 +83,7 @@
     <!-- ============================= -->
     <!-- 🔹 Presensi Section (from Desktop.tsx) -->
     <!-- ============================= -->
-    <section id="presensi" class="relative w-full flex flex-col items-center py-16 px-4 md:px-8 lg:px-[123px]">
+    <section id="presensi" class="relative w-full flex flex-col items-center py-16 px-4 md:px-8 lg:px-[123px] bg-white">
       <h1 class="text-3xl md:text-5xl lg:text-[64px] font-semibold text-center mb-20">Presensi Tamu</h1>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-[1195px]">
@@ -95,7 +129,7 @@
     <!-- ============================= -->
     <!-- 🔹 GuestInfoSection -->
     <!-- ============================= -->
-    <section id="panduan" class="relative w-full bg-[#1d4c0833] py-16">
+    <section id="panduan" class="relative w-full py-16" style="background-color: #d1dbcd;">
       <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6">
         <div class="flex flex-col gap-6">
           <h2 class="text-3xl md:text-5xl font-semibold text-black">Panduan Pengisian</h2>
@@ -103,23 +137,23 @@
             Pengunjung Pengadilan Tinggi Agama Gorontalo diwajibkan mengisi buku tamu digital yang tersedia di area layanan. Silakan pilih kategori kunjungan sesuai keperluan, lalu lengkapi data diri dengan benar.
           </p>
           <a href="#" class="w-full md:w-auto bg-white border border-gray-300 hover:bg-gray-50 rounded-full py-3 px-5 flex justify-between items-center gap-3">
-            <span class="text-black text-sm font-medium">Lihat panduan buku tamu (e-book)</span>
-            <img src="public/images/arrow-1.svg" alt="Arrow" class="w-[12px] h-[12px]" />
+            <span class="text-black text-sm font-medium">Lihat panduan pengisian buku tamu</span>
+             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
           </a>
         </div>
 
         <div class="flex flex-col gap-6 items-center">
-          <div class="bg-[#ff0000] rounded-[20px] h-[220px] flex justify-center items-center w-full max-w-[400px]">
-            <div class="bg-white w-[100px] h-[100px] rounded-full flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-black" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
+          <!-- This wrapper div controls the shape and size -->
+          <div class="w-full aspect-video">
+            <iframe 
+              class="w-full h-full rounded-[20px]" 
+              src="https://www.youtube.com/embed/USNVLKvUMo0?si=YSWDN0PG3fPrjrtR" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
           </div>
-          <a href="#" class="w-full md:w-auto bg-[#1d4c08] hover:bg-[#1d4c08]/90 rounded-full py-3 px-5 flex justify-between items-center gap-3 text-white">
-            <span class="text-sm font-medium">Lihat panduan buku tamu (video)</span>
-            <img src="public/images/arrow-1.svg" alt="Arrow" class="w-[12px] h-[12px]" />
-          </a>
         </div>
       </div>
     </section>
@@ -127,7 +161,7 @@
     <!-- ============================= -->
     <!-- 🔹 FooterSection -->
     <!-- ============================= -->
-    <footer class="w-full bg-white py-8">
+    <footer class="w-full bg-white py-8 z-10">
       <div class="max-w-6xl mx-auto px-6">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
           <div class="flex items-center gap-6">
@@ -137,10 +171,10 @@
           </div>
 
           <div class="flex gap-4">
-            <a href="https://facebook.com" target="_blank"><img src="public/images/facebook.svg" alt="Facebook" class="w-6 h-6" /></a>
-            <a href="https://youtube.com" target="_blank"><img src="public/images/youtube.svg" alt="YouTube" class="w-6 h-6" /></a>
-            <a href="https://instagram.com" target="_blank"><img src="public/images/instagram.svg" alt="Instagram" class="w-6 h-6" /></a>
-            <a href="https://pa-gorontalo.go.id" target="_blank"><img src="public/images/globe.svg" alt="Website" class="w-6 h-6" /></a>
+            <a href="https://www.facebook.com/pta.gorontalo/" target="_blank"><img src="public/images/facebook.svg" alt="Facebook" class="w-6 h-6" /></a>
+            <a href="https://www.youtube.com/@PengadilanTinggiAgamaGorontalo" target="_blank"><img src="public/images/youtube.svg" alt="YouTube" class="w-6 h-6" /></a>
+            <a href="https://www.instagram.com/ptagorontalo/" target="_blank"><img src="public/images/instagram.svg" alt="Instagram" class="w-6 h-6" /></a>
+            <a href="https://pta-gorontalo.go.id" target="_blank"><img src="public/images/globe.svg" alt="Website" class="w-6 h-6" /></a>
           </div>
         </div>
 
@@ -156,5 +190,26 @@
         </div>
       </div>
     </footer>
+
+    <!-- JavaScript for Hamburger Menu -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuLinks = mobileMenu.querySelectorAll('a');
+
+        // Toggle menu visibility
+        hamburgerButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when a link is clicked
+        menuLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+      });
+    </script>
   </body>
 </html>

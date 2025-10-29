@@ -14,10 +14,10 @@
   if (!empty($search)) {
       $search_term = "%" . $search . "%";
       // Menambahkan kondisi pencarian pada beberapa kolom
-      $conditions[] = "(t.nama LIKE ? OR t.instansi_asal LIKE ? OR t.keperluan LIKE ?)";
+      $conditions[] = "(t.nama LIKE ? OR t.instansi_asal LIKE ? OR t.keperluan LIKE ? OR pt.nama_penerima LIKE ?)";
       // Menambahkan parameter untuk binding
-      array_push($params, $search_term, $search_term, $search_term);
-      $types .= 'sss'; // s = string, untuk setiap parameter
+      array_push($params, $search_term, $search_term, $search_term, $search_term);
+      $types .= 'ssss'; // s = string, untuk setiap parameter
   }
 
   // --- Logika Filter Tanggal ---
@@ -38,11 +38,15 @@
   // --- MEMBUAT QUERY SQL AKHIR ---
   $sql = "SELECT 
               t.tamu_id, t.nama, t.no_telpon, t.instansi_asal, t.alamat,
-              b.nama_bidang, t.keperluan, t.tanggal_janji, t.metode_pertemuan, t.foto
+              b.nama_bidang, 
+              pt.nama_penerima, -- TAMBAHKAN INI
+              t.keperluan, t.tanggal_janji, t.metode_pertemuan, t.foto
           FROM 
               tamu t
           JOIN 
-              bidang_tujuan b ON t.bidang_tujuan_id = b.bidang_tujuan_id";
+              bidang_tujuan b ON t.bidang_tujuan_id = b.bidang_tujuan_id
+          LEFT JOIN -- TAMBAHKAN BLOK JOIN INI
+              penerima_tamu pt ON t.penerima_tamu_id = pt.id_penerima";
 
   // Menggabungkan semua kondisi dengan 'AND'
   if (!empty($conditions)) {
@@ -83,7 +87,7 @@
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden w-full sm:w-1/2 bg-white">
             <img src="../public/images/search.svg" alt="Search" class="w-5 h-5 mx-2 text-gray-500" />
-            <input type="text" name="search" placeholder="Cari nama, instansi, atau keperluan..." class="flex-1 p-2 outline-none text-sm" value="<?php echo htmlspecialchars($search); ?>" />
+            <input type="text" name="search" placeholder="Cari nama, instansi, keperluan, atau penerima..." class="flex-1 p-2 outline-none text-sm" value="<?php echo htmlspecialchars($search); ?>" />
           </div>
           <div class="flex items-center gap-2">
             <select name="filter" class="border border-gray-300 rounded-lg p-2 text-sm text-gray-700 bg-white">
@@ -106,6 +110,7 @@
                 <th class="px-4 py-3">No.</th>
                 <th class="px-4 py-3">ID Tamu</th>
                 <th class="px-4 py-3">Nama</th>
+                <th class="px-4 py-3">Bertemu Dengan</th>
                 <th class="px-4 py-3">Tanggal Janji</th>
                 <th class="px-4 py-3">Metode Pertemuan</th>
                 <th class="px-4 py-3">Keperluan</th>
@@ -125,6 +130,9 @@
                 <td class="px-4 py-3 whitespace-nowrap"><?php echo $nomor++; ?></td>
                 <td class="px-4 py-3 whitespace-nowrap"><?php echo htmlspecialchars($row["tamu_id"]); ?></td>
                 <td class="px-4 py-3 whitespace-nowrap font-medium text-gray-900"><?php echo htmlspecialchars($row["nama"] ?: 'Belum ditentukan'); ?></td>
+                <td class="px-4 py-3 whitespace-nowrap">
+                  <?php echo htmlspecialchars($row["nama_penerima"] ?: 'Belum ditentukan'); ?>
+                </td>
                 <td class="px-4 py-3 whitespace-nowrap">
                   <?php echo $row["tanggal_janji"] ? htmlspecialchars(date('d-m-Y', strtotime($row["tanggal_janji"]))) : 'Belum ditentukan'; ?>
                 </td>
@@ -151,7 +159,7 @@
                 }
               } else {
                 // Ini sudah benar untuk menangani JIKA TIDAK ADA DATA SAMA SEKALI (hasil query kosong)
-                echo '<tr><td colspan="10" class="p-4 text-center text-gray-500">Data tamu tidak ditemukan.</td></tr>';
+                echo '<tr><td colspan="11" class="p-4 text-center text-gray-500">Data tamu tidak ditemukan.</td></tr>';
               }
               ?>
             </tbody>
