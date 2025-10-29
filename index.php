@@ -31,9 +31,10 @@
       class="sticky top-0 z-50 w-full min-h-[80px] md:min-h-[100px] lg:h-[115px] flex items-center justify-between gap-4 md:gap-0 py-4 px-4 md:px-8 lg:px-[120px] bg-[#ffffff80] shadow-[0px_4px_9px_#00000040] backdrop-blur-[2px] backdrop-brightness-[110%]"
     >
       <div class="flex items-center justify-center md:justify-start">
-        <img src="public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="w-10 h-12 md:w-[59px] md:h-[73px] ml-0 md:ml-8 lg:ml-[120px]" />
+        <!-- <img src="public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="h-12 w-auto md:h-[73px] md:w-auto ml-0 md:ml-8 lg:ml-[120px]" />
         <img src="public/images/pan-rb-qdw0uf2dup27vg4nbkjrrm75c0xvmz2s0pbnrvyh3o-1.png" alt="Pan RB" class="w-12 h-12 md:w-[73px] md:h-[73px] ml-3 md:ml-5" />
-        <img src="public/images/logo-berakhlak-1024x390-1.png" alt="Logo berakhlak" class="w-24 h-9 md:w-[142px] md:h-[54px] ml-2 md:ml-[13px]" />
+        <img src="public/images/logo-berakhlak-1024x390-1.png" alt="Logo berakhlak" class="w-24 h-9 md:w-[142px] md:h-[54px] ml-2 md:ml-[13px]" /> -->
+        <img src="public/images/logo-semua.png" alt="Logo" class="h-12 w-auto md:h-[73px] md:w-auto ml-0 md:ml-8 lg:ml-[120px]" />
       </div>
 
       <!-- Desktop Navigation (Hidden on Mobile) -->
@@ -86,40 +87,16 @@
     <section id="presensi" class="relative w-full flex flex-col items-center py-16 px-4 md:px-8 lg:px-[123px] bg-white">
       <h1 class="text-3xl md:text-5xl lg:text-[64px] font-semibold text-center mb-20">Presensi Tamu</h1>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-[1195px]">
-        <!-- Card Template -->
-        <div class="bg-white rounded-[20px] shadow-[0_0_50px_-5px_#00000040] p-8 flex flex-col items-center">
+      <div class="flex justify-center w-full">
+        <div class="bg-white rounded-[20px] shadow-[0_0_50px_-5px_#00000040] p-8 flex flex-col items-center w-full max-w-sm">
           <div class="w-[100px] h-[100px] bg-[#1d4c08] rounded-full flex items-center justify-center mb-6">
-            <img src="public/images/fa6-solid-landmark.svg" alt="Tamu Pimpinan" class="w-[50px] h-[50px]" />
+            <img src="public/images/fa6-solid-landmark.svg" alt="Presensi Tamu" class="w-[50px] h-[50px]" />
           </div>
-          <h3 class="font-medium text-black text-lg text-center mb-2">Tamu Pimpinan</h3>
-          <p class="text-[#666666] text-sm text-center mb-6">Presensi bagi tamu-tamu pimpinan Pengadilan Agama Gorontalo</p>
-          <a href="form_tamu.php?bidang=pimpinan" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
-            <span>Presensi</span>
-            <img src="public/images/arrow-1.svg" alt="Arrow" class="w-[12px] h-[12px]" />
-          </a>
-        </div>
-
-        <div class="bg-white rounded-[20px] shadow-[0_0_50px_-5px_#00000040] p-8 flex flex-col items-center">
-          <div class="w-[100px] h-[100px] bg-[#1d4c08] rounded-full flex items-center justify-center mb-6">
-            <img src="public/images/material-symbols-balance-rounded.svg" alt="Tamu Kepaniteraan" class="w-[50px] h-[50px]" />
-          </div>
-          <h3 class="font-medium text-black text-lg text-center mb-2">Tamu Kepaniteraan</h3>
-          <p class="text-[#666666] text-sm text-center mb-6">Presensi bagi tamu-tamu kepaniteraan Pengadilan Agama Gorontalo</p>
-          <a href="form_tamu.php?bidang=kepaniteraan" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
-            <span>Presensi</span>
-            <img src="public/images/arrow-1.svg" alt="Arrow" class="w-[12px] h-[12px]" />
-          </a>
-        </div>
-
-        <div class="bg-white rounded-[20px] shadow-[0_0_50px_-5px_#00000040] p-8 flex flex-col items-center">
-          <div class="w-[100px] h-[100px] bg-[#1d4c08] rounded-full flex items-center justify-center mb-6">
-            <img src="public/images/vector.svg" alt="Tamu Kesekretariatan" class="w-[50px] h-[50px]" />
-          </div>
-          <h3 class="font-medium text-black text-lg text-center mb-2">Tamu Kesekretariatan</h3>
-          <p class="text-[#666666] text-sm text-center mb-6">Presensi bagi tamu-tamu kesekretariatan Pengadilan Agama Gorontalo</p>
-          <a href="form_tamu.php?bidang=kesekretariatan" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
-            <span>Presensi</span>
+          <h3 class="font-medium text-black text-lg text-center mb-2">Buku Tamu</h3>
+          <p class="text-[#666666] text-sm text-center mb-6">Silakan isi buku tamu digital Pengadilan Agama Gorontalo</p>
+          
+          <a href="form_tamu.php" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
+            <span>Isi Presensi</span>
             <img src="public/images/arrow-1.svg" alt="Arrow" class="w-[12px] h-[12px]" />
           </a>
         </div>
@@ -165,9 +142,9 @@
       <div class="max-w-6xl mx-auto px-6">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
           <div class="flex items-center gap-6">
-            <img src="public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="w-10 h-12" />
-            <img src="public/images/pan-rb-qdw0uf2dup27vg4nbkjrrm75c0xvmz2s0pbnrvyh3o-1.png" alt="Pan RB" class="w-12 h-12" />
-            <img src="public/images/logo-berakhlak-1024x390-1.png" alt="Logo berakhlak" class="w-24 h-9" />
+            <img src="public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="w-auto h-12" />
+            <img src="public/images/pan-rb-qdw0uf2dup27vg4nbkjrrm75c0xvmz2s0pbnrvyh3o-1.png" alt="Pan RB" class="w-auto h-12" />
+            <img src="public/images/logo-berakhlak-1024x390-1.png" alt="Logo berakhlak" class="w-auto h-9" />
           </div>
 
           <div class="flex gap-4">
@@ -186,7 +163,7 @@
             <a href="#presensi" class="hover:opacity-70">Presensi</a>
             <a href="#panduan" class="hover:opacity-70">Panduan</a>
           </nav>
-          <p class="text-xs text-gray-700">© 2025. All rights reserved.</p>
+          <p class="text-xs text-gray-700">Copyright © 2025. Pengadilan Tinggi Agama Gorontalo.</p>
         </div>
       </div>
     </footer>

@@ -1,28 +1,12 @@
 <?php
 include 'config/config.php';
 
-$bidang = $_GET['bidang'] ?? 'pimpinan';
+// Logika $_GET['bidang'] tidak lagi diperlukan karena akan dipilih di form
+// Judul sekarang statis
+$judul = 'Buku Presensi Tamu';
 
-switch ($bidang) {
-  case 'kepaniteraan':
-    $judul = 'Buku Presensi Tamu Kepaniteraan';
-    $id_bidang = 2;
-    break;
-  case 'kesekretariatan':
-    $judul = 'Buku Presensi Tamu Kesekretariatan';
-    $id_bidang = 3;
-    break;
-  default:
-    $judul = 'Buku Presensi Tamu Pimpinan';
-    $id_bidang = 1;
-    break;
-}
-
-$bidangResult = mysqli_query($conn, "SELECT * FROM penerima_tamu where bidang_tujuan_id = $id_bidang");
-
-if (!$bidangResult) {
-  die("Query gagal: " . mysqli_error($conn));
-}
+// Query $bidangResult juga tidak diperlukan di sini,
+// karena akan diambil melalui AJAX
 ?>
 
 <!DOCTYPE html>
@@ -30,34 +14,25 @@ if (!$bidangResult) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buku Presensi Tamu Pimpinan</title>
+    <title>Buku Presensi Tamu</title>
     <link rel="stylesheet" href="public/css/output.css">
   </head>
   <body class="bg-white w-full min-h-screen flex flex-col">
-    <!-- Header -->
     <header class="w-full h-[115px] flex items-center justify-center bg-white shadow-[0px_4px_9px_#00000040]">
       <div class="flex items-center gap-3 sm:gap-5 px-4">
-        <img src="public/images/logo-pengadilan-tinggi-agama-gorontalo-1.png" alt="Logo pengadilan" class="w-[40px] h-[50px] sm:w-[59px] sm:h-[73px] object-cover" />
-        <img src="public/images/pan-rb-qdw0uf2dup27vg4nbkjrrm75c0xvmz2s0pbnrvyh3o-1.png" alt="Pan RB" class="w-[50px] h-[50px] sm:w-[73px] sm:h-[73px] object-cover" />
-        <img src="public/images/logo-berakhlak-1024x390-1.png" alt="Logo berakhlak" class="w-[100px] h-[38px] sm:w-[142px] sm:h-[54px] object-cover" />
+        <img src="public/images/logo-semua.png" alt="Logo" class="h-12 w-auto md:h-[73px] md:w-auto ml-0 md:ml-8 lg:ml-[120px]" />
       </div>
     </header>
 
-    <!-- Main -->
     <main class="flex flex-col items-center px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
       <div class="w-full max-w-[1195px]">
-        <!-- Back button -->        
         <button onclick="window.location.href='index.php';" class="flex items-center gap-2 sm:gap-[17px] bg-[#1d4c08] hover:bg-[#256a10] rounded-full h-9 sm:h-11 px-4 sm:px-[21px] mb-3 sm:mb-4 text-white transition-all duration-200">
           <img src="public/images/arrow-2.svg" alt="Kembali" class="w-4 h-3 sm:w-[21px] sm:h-[14.73px]" />
           <span class="font-medium text-xs sm:text-sm">Kembali</span>
         </button>
-        <!-- Title -->
         <h1 class="font-semibold text-black text-2xl sm:text-3xl lg:text-4xl text-center mb-8 sm:mb-12"><?= $judul; ?></h1>
         
-        <!-- Form -->
-        <form id=formtamu class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[46px] mb-8 sm:mb-12" enctype="multipart/form-data" method="POST" action="utils/formInsert.php">
-          <input type="hidden" name="bidang_id" value="<?= $id_bidang; ?>">
-          <!-- Left column -->
+        <form id="formtamu" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[46px] mb-8 sm:mb-12" enctype="multipart/form-data" method="POST" action="utils/formInsert.php">
           <div class="flex flex-col gap-5 sm:gap-6">
             <div class="flex flex-col gap-2.5">
               <label for="nama" class="font-semibold text-[#666666] text-base">Nama</label>
@@ -81,13 +56,20 @@ if (!$bidangResult) {
             </div>
 
             <div class="flex flex-col gap-2.5">
-              <label for="tujuan" class="font-semibold text-[#666666] text-base">Tujuan</label>
-              <select id="tujuan" name="tujuan" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required>
-                <option selected disabled>Pilih Tujuan</option>
-                <?php while ($b = mysqli_fetch_assoc($bidangResult)) { ?>
-                  <option value="<?= $b['id_penerima']; ?>"><?= $b['jabatan']; ?> - <?= $b['nama_penerima']; ?></option>
-                  <?php } ?>
+              <label for="bidang" class="font-semibold text-[#666666] text-base">Bidang Tujuan</label>
+              <select id="bidang" name="bidang_id" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required>
+                <option value="" selected disabled>Pilih Bidang Tujuan</option>
+                <option value="1">Pimpinan</option>
+                <option value="2">Kepaniteraan</option>
+                <option value="3">Kesekretariatan</option>
               </select>
+            </div>
+
+            <div class="flex flex-col gap-2.5">
+              <label for="tujuan" class="font-semibold text-[#666666] text-base">Tujuan (Orang yang Ditemui)</label>
+              <select id="tujuan" name="tujuan" class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required disabled>
+                <option selected disabled>Pilih Bidang Terlebih Dahulu</option>
+                </select>
             </div>
 
             <div class="flex flex-col gap-2.5">
@@ -96,16 +78,13 @@ if (!$bidangResult) {
             </div>
           </div>
 
-          <!-- Right column -->
           <div class="flex flex-col gap-5">
-            <!-- Tanggal Janji Temu -->
             <div class="flex flex-col gap-2.5">
               <label for="tanggal_janji" class="font-semibold text-[#666666] text-base">Tanggal & Waktu Janji Temu</label>
               <input type="date" id="tanggal_janji" name="tanggal_janji"
                 class="p-3 sm:p-4 bg-white rounded-lg border border-[#cccccc] text-[#666666] text-base" required />
             </div>
 
-            <!-- Metode Pertemuan -->
             <div class="flex flex-col gap-2.5">
               <label class="font-semibold text-[#666666] text-base">Metode Pertemuan</label>
               <div class="flex items-center gap-6">
@@ -131,38 +110,30 @@ if (!$bidangResult) {
             <input type="hidden" name="base64_foto" id="base64_foto">
             <p class="text-[#9c9c9c] text-sm">Format yang diterima adalah .jpg, .jpeg, dan .png</p>
 
-            <!-- Tambahkan tombol kamera -->
             <div class="mt-3 text-center">
               <button type="button" onclick="openCamera()" class="bg-[#1d4c08] hover:bg-[#256a10] text-white px-5 py-2 rounded-full text-sm transition">Ambil dari Kamera</button>
             </div>
 
 
             <img src="public/images/divider-line.svg" alt="Divider" class="w-full h-px object-cover" />
-            <!-- Alert container -->
             <div id="alert-container" class="fixed top-4 right-4 hidden z-50"></div>
           </div>
         </form>
 
-        <!-- Submit -->
         <button type="submit" form=formtamu class="w-full h-11 bg-[#1d4c08] hover:bg-[#256a10] rounded-[100px] text-white font-medium text-sm">Kirim</button>
       </div>
     </main>
-
     
-    
-    <!-- Modal Kamera -->
     <div id="modalCamera" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
       <div class="bg-white rounded-xl shadow-xl p-6 w-[90%] max-w-md relative">
         <h2 class="text-xl font-semibold mb-4 text-center text-gray-800">Ambil Foto Diri</h2>
 
-        <!-- Kamera dengan Outline -->
         <div class="flex justify-center w-full">
           <div id="my_camera"
             class="rounded-xl overflow-hidden mb-4 border border-gray-200 outline outline-1 outline-[#1d4c08] outline-offset-0 w-full h-[240px]">
           </div>
         </div>
 
-        <!-- Tombol Aksi (lebar menyesuaikan video) -->
         <div class="flex justify-between mt-4 w-full">
           <button onclick="closeCamera()" 
             class="bg-gray-100 text-[#1d4c08] px-4 py-2 rounded-full border border-[#1d4c08] hover:bg-[#1d4c08] hover:text-white transition w-[48%]">
@@ -176,9 +147,73 @@ if (!$bidangResult) {
       </div>
     </div>
 
-    <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
-    <script src = "public/js/main.js"></script>
-    <!-- <script src="public/js/alert.js"></script> -->
+    <script src="public/js/main.js"></script>
+
+    <script>
+      // Pastikan script ini dijalankan setelah DOM selesai dimuat
+      document.addEventListener('DOMContentLoaded', () => {
+        
+        // Ambil elemen dropdown
+        const bidangDropdown = document.getElementById('bidang');
+        const tujuanDropdown = document.getElementById('tujuan');
+
+        // Tambahkan event listener ke dropdown bidang
+        bidangDropdown.addEventListener('change', function() {
+          const bidangId = this.value; // Ambil ID bidang yang dipilih (misal: 1, 2, atau 3)
+          
+          // Kosongkan dan nonaktifkan dropdown tujuan saat sedang memuat
+          tujuanDropdown.innerHTML = '<option value="" selected disabled>Memuat...</option>';
+          tujuanDropdown.disabled = true;
+
+          // Jika bidangId ada (bukan "Pilih Bidang")
+          if (bidangId) {
+            // Lakukan 'fetch' ke file PHP baru
+            fetch(`get_penerima.php?bidang_id=${bidangId}`)
+              .then(response => {
+                // Pastikan respons-nya OK
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.json(); // Ubah respons menjadi JSON
+              })
+              .then(data => {
+                // Aktifkan kembali dropdown tujuan
+                tujuanDropdown.disabled = false;
+                
+                // Hapus opsi "Memuat..."
+                tujuanDropdown.innerHTML = ''; 
+
+                // Cek apakah data (penerima tamu) ditemukan
+                if (data.length > 0) {
+                  // Tambahkan opsi default
+                  tujuanDropdown.innerHTML = '<option value="" selected disabled>Pilih Tujuan</option>';
+                  
+                  // Loop data JSON dan tambahkan sebagai <option>
+                  data.forEach(penerima => {
+                    const option = document.createElement('option');
+                    option.value = penerima.id_penerima;
+                    option.textContent = `${penerima.jabatan} - ${penerima.nama_penerima}`;
+                    tujuanDropdown.appendChild(option);
+                  });
+                } else {
+                  // Jika tidak ada data
+                  tujuanDropdown.innerHTML = '<option value="" selected disabled>Tidak ada data penerima</option>';
+                }
+              })
+              .catch(error => {
+                // Tangani error
+                console.error('Error fetching data:', error);
+                tujuanDropdown.innerHTML = '<option value="" selected disabled>Gagal memuat data</option>';
+              });
+          } else {
+            // Jika pengguna memilih "Pilih Bidang" (value kosong)
+            tujuanDropdown.innerHTML = '<option value="" selected disabled>Pilih Bidang Terlebih Dahulu</option>';
+            tujuanDropdown.disabled = true;
+          }
+        });
+      });
+    </script>
+    
   </body>
 </html>
