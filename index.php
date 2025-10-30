@@ -171,7 +171,7 @@
     <!-- 🔹 GuestInfoSection -->
     <!-- ============================= -->
     <section id="panduan" class="relative w-full py-16 z-10" style="background-color: #d1dbcd;">
-      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div class="flex flex-col gap-6">
           <h2 class="text-3xl md:text-5xl font-semibold text-black">Panduan Pengisian</h2>
           <p class="text-black text-base leading-relaxed text-justify">
