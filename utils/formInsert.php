@@ -63,7 +63,7 @@ if ($stmt->execute()) {
   // Data berhasil disimpan. Sekarang siapkan redirect WA.
 
   // 1. Tentukan Nomor Admin
-  $nomor_admin_wa = '628114312250'; // Sesuai permintaan Anda
+  $nomor_admin_wa = '6282322217627'; // Sesuai permintaan Anda
 
   // 2. Dapatkan NAMA BIDANG berdasarkan ID
   $nama_bidang = 'Tidak diketahui';
@@ -93,36 +93,48 @@ if ($stmt->execute()) {
   // 5. Buat template pesan (\n = baris baru di WA)
   $pesan_template = "
 *Konfirmasi Janji Temu Tamu*
-\n\n
+
 Mohon izin, saya telah mengisi buku tamu digital dengan data sebagai berikut:
-\n\n
+
 *Nama:* $nama
 *No. Telepon/WA:* $telepon
 *Instansi Asal:* $instansi
-\n\n
+
 *Bidang Tujuan:* $nama_bidang
 *Bertemu dengan:* $nama_tujuan
 *Keperluan:* $keperluan
 *Tanggal Janji:* $tanggal_janji
 *Metode:* $metode
-\n\n
+
 Mohon untuk dapat diteruskan kepada yang bersangkutan.
-\n
 Terima kasih.
 ";
   
-  // Rapikan pesan (hapus spasi/tab di awal baris)
-  $pesan_template_clean = trim(preg_replace('/^\s+/m', '', $pesan_template));
+  // ========================================================
+  // 🔹 PERBAIKAN DIMULAI DI SINI 🔹
+  // ========================================================
 
-  // 6. Buat URL WhatsApp
-  $wa_url = 'https://wa.me/' . $nomor_admin_wa . '?text=' . urlencode($pesan_template_clean);
+  // 6. Rapikan pesan (HANYA hapus spasi/tab di awal baris, BUKAN \n)
+  // Pola diubah dari /^\s+/m menjadi /^[ \t]+/m
+  $pesan_clean_indent = trim(preg_replace('/^[ \t]+/m', '', $pesan_template));
 
-  // 7. Redirect pengguna ke URL WhatsApp
+  // 7. GANTI semua \n (baik yg diketik \n atau dari enter) menjadi \r\n
+  // Ini adalah kunci agar WhatsApp mau memberi 'enter'
+  $pesan_wa_ready = str_replace("\n", "\r\n", $pesan_clean_indent);
+
+  // 8. Buat URL WhatsApp (sekarang gunakan $pesan_wa_ready)
+  $wa_url = 'https://wa.me/' . $nomor_admin_wa . '?text=' . urlencode($pesan_wa_ready);
+  
+  // ========================================================
+  // 🔹 PERBAIKAN SELESAI 🔹
+  // ========================================================
+
+  // 9. Redirect pengguna ke URL WhatsApp
   // PERHATIAN: Pastikan tidak ada 'echo' atau HTML sebelum baris ini
   header('Location: ' . $wa_url);
   
-  // 8. Wajib ada exit; setelah header location
-  exit; 
+  // 10. Wajib ada exit; setelah header location
+  exit;
 
 } else {
   // Jika GAGAL, baru tampilkan error

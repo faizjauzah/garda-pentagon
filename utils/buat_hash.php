@@ -1,6 +1,6 @@
 <?php
 // Masukkan password yang Anda inginkan di sini
-$passwordAsli = 'admin123';
+$passwordAsli = 'pentagon@123';
 
 $hash = password_hash($passwordAsli, PASSWORD_DEFAULT);
 
