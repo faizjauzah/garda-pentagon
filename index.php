@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Garda Pentagon - Pengadilan Agama Gorontalo</title>
+    <title>Garda Pentagon - Pengadilan Tinggi Agama Gorontalo</title>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="public/css/output.css" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
@@ -122,7 +122,7 @@
             <p class="text-white text-base md:text-xl lg:text-2xl">Selamat Datang di</p>
             <h1 class="text-white text-4xl md:text-6xl lg:text-8xl font-semibold">GARDA PENTAGON</h1>
             <!-- [MODIFIED] max-w-620px dihapus dari sini -->
-            <p class="text-[#d9d9d9] text-base md:text-xl lg:text-2xl">Guest and Administration Pengadilan Agama Gorontalo</p>
+            <p class="text-[#d9d9d9] text-base md:text-xl lg:text-2xl">Guest and Administration Pengadilan Tinggi Agama Gorontalo</p>
 
             <div class="flex flex-col sm:flex-row gap-4 mt-4">
               <a href="#presensi" class="px-5 py-3 rounded-[100px] bg-gradient-to-b from-[#fbfbfe] to-[#f1f2f9] border border-[#d9dbe9] text-[#170f49] hover:opacity-90 text-sm font-medium">Presensi Tamu</a>
@@ -157,7 +157,7 @@
             <img src="public/images/fa6-solid-landmark.svg" alt="Presensi Tamu" class="w-[50px] h-[50px]" />
           </div>
           <h3 class="font-medium text-black text-lg text-center mb-2">Buku Tamu</h3>
-          <p class="text-[#666666] text-sm text-center mb-6">Silakan isi buku tamu digital Pengadilan Agama Gorontalo</p>
+          <p class="text-[#666666] text-sm text-center mb-6">Silakan isi buku tamu digital Pengadilan Tinggi Agama Gorontalo</p>
           
           <a href="form_tamu.php" class="w-full max-w-[290px] bg-[#1d4c08] hover:bg-[#2a6b0c] text-white py-2 rounded-full flex justify-center items-center gap-2">
             <span>Isi Presensi</span>
@@ -177,7 +177,7 @@
           <p class="text-black text-base leading-relaxed text-justify">
             Pengunjung Pengadilan Tinggi Agama Gorontalo diwajibkan mengisi buku tamu digital yang tersedia di area layanan. Silakan pilih kategori kunjungan sesuai keperluan, lalu lengkapi data diri dengan benar.
           </p>
-          <a href="#" class="w-full md:w-auto bg-white border border-gray-300 hover:bg-gray-50 rounded-full py-3 px-5 flex justify-between items-center gap-3">
+          <a href="https://drive.google.com/file/d/14LMLZ7e8Txz-LePUFVs9ui0PhAFPWJGR/view?usp=drivesdk" class="w-full md:w-auto bg-white border border-gray-300 hover:bg-gray-50 rounded-full py-3 px-5 flex justify-between items-center gap-3">
             <span class="text-black text-sm font-medium">Lihat panduan pengisian buku tamu</span>
              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
           </a>
@@ -188,7 +188,7 @@
           <div class="w-full aspect-video">
             <iframe 
               class="w-full h-full rounded-[20px]" 
-              src="https://www.youtube.com/embed/USNVLKvUMo0?si=YSWDN0PG3fPrjrtR" 
+              src="https://www.youtube.com/embed/xERA1rUDdg0?si=VO16-9cLCqPfs3hc"
               title="YouTube video player" 
               frameborder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
